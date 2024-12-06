@@ -115,8 +115,14 @@ export default function PostDetails() {
                                 {c.username?.at(0) + c.userlasname?.at(0)}
                               </div>
                               <aside>
-                                <b>{c.username + " " + c.userlasname}</b>
-                                <i>{c.email}</i>
+                                <b>
+                                  {c.username +
+                                    " " +
+                                    c.userlasname +
+                                    " ---> " +
+                                    c.email}
+                                </b>
+
                                 <i>7 Respostas</i>
                                 <span>
                                   <FaRegTrashAlt />
@@ -153,8 +159,13 @@ export default function PostDetails() {
                             </div>
                           )}
                           <aside>
-                            <b>{c.username + " " + c.userlasname}</b>
-                            <i>{c.email}</i>
+                            <b>
+                              {c.username +
+                                " " +
+                                c.userlasname +
+                                " ---> " +
+                                c.email}
+                            </b>
                             <i>7 Respostas</i>
                             <span>
                               <FaRegTrashAlt />

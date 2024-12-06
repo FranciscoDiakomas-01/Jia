@@ -116,8 +116,8 @@
     word-wrap: break-word;
 }
 #postDetails  > aside > div figure > span > div{
-    height: 70px;
-    width: 70px;
+    height: 60px;
+    width: 60px;
     border-radius: 50%;
 }
 #postDetails  > aside > span  > div{

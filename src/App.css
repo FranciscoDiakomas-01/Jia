@@ -122,9 +122,9 @@ button:active , svg:active{
   position: relative;
   
 }
-#app > svg{
+#app > svg , #app > b{
   position: fixed;
-  right: 30px;
+  right: 40px;
   top: 20px;
   color: var(--green);
   font-size: 14pt;
@@ -132,5 +132,11 @@ button:active , svg:active{
 }
 
 #app > svg:last-of-type{
-  right: 5px;
+  right: 20px;
 }
+
+ #app > b{
+  right: 0;
+  color: var(--white);
+  top: 15px;
+ }

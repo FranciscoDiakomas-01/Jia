@@ -54,6 +54,7 @@ export function App() {
           nav("/notifications");
         }}
       />
+      <b>10</b>
       <nav>
         <img src={logo} alt="logo" />
         <ol>
