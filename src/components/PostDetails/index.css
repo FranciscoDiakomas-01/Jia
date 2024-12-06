@@ -1,0 +1,174 @@
+#postDetails{
+    width: 95%;
+    position: relative;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    gap: 30px;
+    min-height: 95dvh;
+}
+
+#postDetails > svg{
+    top: 0px;
+    left: 20px;
+    font-size: 18pt;
+    color: var(--green);
+    height: 40px;
+}
+
+#postDetails  > aside{
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    gap: 20px;
+}
+#postDetails  > aside > *{
+    width: 50%;
+}
+#postDetails  > aside > span{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    word-wrap: break-word;
+}
+#postDetails  > aside img{
+    height: 550px;
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+
+#postDetails  > aside > div{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    height: 550px;
+    border-radius: 10px;
+    padding: 0 15px;
+    overflow-y: auto;
+    gap: 40px;
+    position: relative;
+    overflow-x: hidden;
+    justify-content: space-between;
+}
+#postDetails  > aside  nav{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14pt;
+    position: sticky;
+    top: 0;
+    background-color: var(--black);
+    width: 100%;
+    z-index: 999;
+    padding: 20px 10px;
+}
+#postDetails  > aside > div form{
+    position: sticky;
+    bottom: 0;
+    background-color: var(--black);
+    z-index: 9;
+    width: 100%;
+}
+
+#postDetails  > aside > div form svg{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: var(--green);
+    font-size: 14pt;
+}
+
+#postDetails  > aside > div figure{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+#postDetails  > aside > div figure aside{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#postDetails  > aside > div figure aside > span{
+    display: flex;
+    justify-content: start;
+    gap: 20px;
+    align-items: center;
+}
+#postDetails  > aside > div figure aside svg{
+    color: var(--pink);
+    font-size: 15pt;
+}
+#postDetails  > aside > div figure aside svg:last-of-type{
+    color: var(--blue);
+}
+#postDetails  > aside > div figure figcaption{
+    background-color: rgba(255, 255, 255, 0.115);
+    height: 100px;
+    border-radius: 5px;
+    padding: 4px;
+    word-wrap: break-word;
+}
+#postDetails  > aside > div figure > span > div{
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+}
+#postDetails  > aside > span  > div{
+    height: 550px;
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--green);
+    font-size: 18pt;
+    word-wrap: break-word;
+}
+
+#postDetails  > figcaption {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+}
+#postDetails  > figcaption p{
+    font-size: 12pt;
+}
+#postDetails  > figcaption article{
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+#postDetails  > figcaption article:first-of-type button{
+ background-color: transparent;
+    color: var(--white);
+    font-size: 18pt;
+    width: 50px;
+}
+
+#postDetails  > figcaption article:last-of-type button{
+    width: 30%;
+    background-color: var(--pink);
+    color: var(--white);
+    height: 45px;
+}
+
+#postDetails  > figcaption article:last-of-type button:last-of-type{
+    background-color: var(--blue);
+}
+
+
+#postDetails  > aside > div figure > span{
+    width: 100%;
+    display: flex;
+    gap: 40px;
+}

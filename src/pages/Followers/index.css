@@ -1,0 +1,120 @@
+#followers{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+}
+
+#followers> div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 30px 0px;
+  height: 90px;
+  position: sticky;
+  top: 0px;
+  background-color: var(--black);
+  z-index: 99;
+}
+
+#followers> div form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#followers> div form div {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+#followers> div form button {
+  height: 100%;
+  position: absolute;
+  right: 5px;
+  font-size: 14pt;
+  background-color: transparent;
+  color: var(--white);
+}
+
+
+#followers> article {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  padding: 10px 0;
+  place-items: center;
+}
+#followers> article img,
+#followers> article figure > span div {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+article figure > span div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--blue);
+}
+
+#followers> article figure {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background-color: rgba(254, 254, 254, 0.107);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 10px;
+}
+#followers> article figure > div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+#followers> article figure > span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#followers> article figure > aside {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+#followers> article figure > aside div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+#followers> article button {
+  width: 100%;
+  border: none;
+  height: 40px;
+  border-radius: 4px;
+  color: var(--white);
+  background-color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}

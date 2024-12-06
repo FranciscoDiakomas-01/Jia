@@ -1,0 +1,136 @@
+#app{
+  width: 100%;
+  display: flex;
+  background-color: var(--black);
+  color: var(--white);
+  position: relative;
+}
+
+button{
+  border: none;
+  cursor: pointer;
+  transition: all .3s linear;
+  min-height: 40px;
+  border-radius: 4px;
+}
+
+form input{
+    width: 100%;
+    height: 45px;
+    outline: none;
+    font-size: 11pt;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.115);
+    padding-left: 10px;
+    border-radius: 5px;
+    color: var(--white);
+}
+input::placeholder{
+    color: var(--white);
+}
+svg{
+  
+  cursor: pointer;
+  transition: all .3s linear;
+}
+button:active , svg:active{
+  scale: 0.5;
+}
+#app > nav{
+  height: 100%;
+  top: 0;
+  width:20%;
+  padding: 10px ;
+  padding-top: 0;
+  position: sticky;
+}
+#app > nav:first-of-type img{
+  height: 100px;
+}
+
+
+#app > nav:first-of-type ol{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 15px;
+  width: 90%;
+}
+#app > nav:first-of-type ol a{
+  display: flex;
+  background-color: #ffffff0e;
+  backdrop-filter: blur(10px);
+  height: 75px;
+  width: 100%;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  opacity: 0.4;
+  transition: all .3s linear;
+}
+
+
+#app > nav:first-of-type ol a:hover{
+  opacity: 1;
+  color: var(--white);
+  transform: translateX(3px);
+}
+
+#app > nav:first-of-type ol a:active{
+  scale: 0.7;
+}
+#app > nav:first-of-type  a{
+  text-decoration: none;
+  color: var(--white);
+  font-size: 14pt;
+}
+
+
+#app > nav:first-of-type {
+  
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+#app > nav:first-of-type button{
+  width: 90%;
+  height: 50px;
+  background-color: var(--green);
+  border: none;
+  color: var(--white);
+  border-radius: 4px;
+}
+
+#app > section{
+  width: 83%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  padding: 30px 10px;
+  padding-top: 0;
+  padding-right: 30px;
+}
+
+#app > section > section {
+  width: 100%;
+  min-height: 100dvh;
+  position: relative;
+  
+}
+#app > svg{
+  position: fixed;
+  right: 30px;
+  top: 20px;
+  color: var(--green);
+  font-size: 14pt;
+  z-index: 9999999;
+}
+
+#app > svg:last-of-type{
+  right: 5px;
+}
