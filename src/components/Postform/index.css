@@ -44,8 +44,29 @@
     background-color: var(--green);
     color: var(--white);
     height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+
+#createPost form button > div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#createPost form button > div span{
+    height: 30px;
+    width: 30px;
+    border: solid 4px var(--white);
+    border-radius: 50%;
+    transition: all .5s linear;
+    border-top: transparent  4px solid;
+    animation: spin 1s linear infinite;
+}
 #createPost > svg{
     position: absolute;
     left: 20px;

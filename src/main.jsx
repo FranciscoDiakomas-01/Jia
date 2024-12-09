@@ -2,23 +2,18 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { App } from './App.jsx';
 import './index.css'
-import { register } from "swiper/element/bundle";
 import Main from './pages/Main/index.jsx';
 import Users from './pages/Users/index.jsx';
 import Posts from './pages/Posts/index.jsx';
-import Folowers from './pages/Followers'
 import UsersProfile from "./pages/UsersProfile/index";
-import Followings from './pages/followings/index.jsx';
 import PostForm from './components/Postform/index.jsx';
 import PostDetails from './components/PostDetails/index.jsx';
-register()
-import 'swiper/css'
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Acount from './pages/Count/index.jsx';
 import Notify from './pages/Notify/index.jsx';
+import Login from './pages/Login/index.jsx';
+import 'react-toastify/ReactToastify.css'
+import SignIn from './pages/Login/signin.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,17 +31,10 @@ const router = createBrowserRouter([
         path: "/posts",
         element: <Posts />,
       },
-      {
-        path: "/followers",
-        element: <Folowers />,
-      },
+
       {
         path: "/userProfile",
         element: <UsersProfile />,
-      },
-      {
-        path: "/followings",
-        element: <Followings />,
       },
       {
         path: "/createPost",
@@ -65,6 +53,14 @@ const router = createBrowserRouter([
         element: <Notify />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/singin",
+    element: <SignIn />,
   },
 ]);
 createRoot(document.getElementById("root")).render(

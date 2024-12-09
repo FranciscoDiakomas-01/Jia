@@ -32,6 +32,17 @@ export default function Acount() {
           <nav>
             <button
               style={{
+                color: active == 1 && "var(--green)",
+                opacity: active == 1 && 1,
+              }}
+              onClick={() => {
+                setActive(1);
+              }}
+            >
+              Minha Senha
+            </button>
+            <button
+              style={{
                 color: active == 0 && "var(--green)",
                 opacity: active == 0 && 1,
               }}
@@ -43,14 +54,14 @@ export default function Acount() {
             </button>
             <button
               style={{
-                color: active == 1 && "var(--green)",
-                opacity: active == 1 && 1,
+                color: "var(--pink)",
+                opacity: active == 2 && 1,
               }}
               onClick={() => {
-                setActive(1);
+                setActive(2);
               }}
             >
-              Minha Senha
+              Deletar
             </button>
           </nav>
 
@@ -97,8 +108,18 @@ export default function Acount() {
               </div>
               <button>Salvar Alterações</button>
             </form>
-          ) : (
+          ) : active == 1 ? (
             <form data-aos="fade-left">
+              <div>
+                <MdOutlineAttachEmail />
+                <label htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  placeholder="Entre com o seu email"
+                  required
+                  type="email"
+                />
+              </div>
               <div>
                 <FiLock />
                 <label htmlFor="password">Senha</label>
@@ -108,7 +129,7 @@ export default function Acount() {
                   type="password"
                   required
                 />
-              </div>{" "}
+              </div>
               <div>
                 <FiLock />
                 <label htmlFor="newPass">Nova Senha</label>
@@ -120,6 +141,30 @@ export default function Acount() {
                 />
               </div>
               <button>Salvar Alterações</button>
+            </form>
+          ) : (
+            <form data-aos="fade-left">
+              <div>
+                <MdOutlineAttachEmail />
+                <label htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  placeholder="Entre com o seu email"
+                  required
+                  type="email"
+                />
+              </div>
+              <div>
+                <FiLock />
+                <label htmlFor="password">Senha</label>
+                <input
+                  id="password"
+                  placeholder="Entre com o sua senha"
+                  type="password"
+                  required
+                />
+              </div>
+              <button style={{backgroundColor : 'var(--pink)'}}>Deletar minha Conta</button>
             </form>
           )}
         </>

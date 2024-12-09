@@ -5,8 +5,10 @@ import { FaUsers, FaComment, FaBell, FaUser } from "react-icons/fa";
 import { BsUiChecksGrid } from "react-icons/bs";
 import { LuSettings } from "react-icons/lu";
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 export function App() {
-  const [active , setActive]  = useState(0)
+  const [active, setActive] = useState(0)
+  const nav = useNavigate()
   const navigations = [
     {
       title: "Inicial",
@@ -25,14 +27,14 @@ export function App() {
     },
 
     {
-      title: "Seguidores",
-      path: "/followers",
-      icon: <FaUsers />,
+      title: "Meu Perfil",
+      path: "/userProfile",
+      icon: <FaUser />,
     },
     {
-      title: "Seguindo",
-      path: "/followings",
-      icon: <FaUsers />,
+      title: "Notificações",
+      path: "/notifications",
+      icon: <FaBell />,
     },
     {
       title: "Configurações",
@@ -40,21 +42,9 @@ export function App() {
       icon: <LuSettings />,
     },
   ];
-  const nav = useNavigate()
   return (
     <main id="app">
-      <FaUser
-        onClick={() => {
-          nav("/userProfile");
-        }}
-      />
-      <FaBell
-        r
-        onClick={() => {
-          nav("/notifications");
-        }}
-      />
-      <b>10</b>
+      <ToastContainer></ToastContainer>
       <nav>
         <img src={logo} alt="logo" />
         <ol>
@@ -80,7 +70,9 @@ export function App() {
             </Link>
           ))}
         </ol>
-        <button>Sair</button>
+        <button onClick={() => {
+          nav("/login")
+        }}>Sair</button>
       </nav>
       <section>
         <Outlet />

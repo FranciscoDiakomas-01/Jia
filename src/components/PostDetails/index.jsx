@@ -1,20 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import "./index.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Loader from "../../components/Loader";
 import { useEffect, useState } from "react";
-import { FaArrowLeft, FaPaperPlane,  FaRegEdit, FaRegHeart , FaRegTrashAlt} from "react-icons/fa";
+import { FaArrowLeft, FaHeart, FaPaperPlane,  FaRegEdit, FaRegHeart , FaRegTrashAlt} from "react-icons/fa";
+import { deletePost, getPostById, isMyPost } from "../../services/posts";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 export default function PostDetails() {
-  const post = {
-    id: 1,
-    title: "Bem Vindo ao meu mundo das maravilhas",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam aperiam assumenda, perferendis veniam aut unde praesentium maiores nisi delectus distinctio omnis, earum dolores! Itaque consectetur, suscipit incidunt ipsa ipsum deleniti.",
-    likes: 30,
-    comments: 40,
-    userId: 10,
-  };
+  const[post , setPost] = useState({})
   const comment = [
  
     {
@@ -23,43 +19,24 @@ export default function PostDetails() {
       username: "Francisco",
       userlasname: "Diakomas",
       email: "fdk@gmail.com",
-    },
-    
-    {
-      userid: 10,
-      text: "Grande kotah 🤞🤞❤️❤️❤️",
-      username: "Francisco",
-      userlasname: "Diakomas",
-      email: "fdk@gmail.com",
-    },
-    {
-      userid: 10,
-      text: "Grande kotah 🤞🤞❤️❤️❤️",
-      username: "Francisco",
-      userlasname: "Diakomas",
-      email: "fdk@gmail.com",
-    },
-    {
-      userid: 10,
-      text: "Grande kotah 🤞🤞❤️❤️❤️",
-      username: "Francisco",
-      userlasname: "Diakomas",
-      email: "fdk@gmail.com",
-    },
+    }
   ];
   const [isLoad, setLoad] = useState(true);
   const [isLoad1, setLoad1] = useState(true);
-  const [answer , setAnswer] = useState(false)
-  const [placeholder, setPlaceHolder] = useState("Adicione um Comentário");
+  const postid = sessionStorage.getItem("postid");
+  const nav = useNavigate()
   useEffect(() => {
-    if (answer == true) {
-        setLoad1(true)
-        setTimeout(() => {
-            setLoad1(false);
-        }, 2000);
-          return
-    }
     setLoad(true);
+    if (!postid || postid == null || postid == undefined) {
+      nav("/")
+      return
+    }
+    async function getData() {
+      const response = await getPostById(postid)
+      console.log(response?.data.data)
+      setPost((prev) => response?.data.data);
+    }
+    getData()
     AOS.init({
       duration: 800,
       easing: "ease-in-out",
@@ -69,143 +46,115 @@ export default function PostDetails() {
     setTimeout(() => {
       setLoad(false);
     }, 2000);
-  }, [answer]);
+
+    setTimeout(() => {
+      setLoad1(false);
+    }, 4000);
+  }, []);
 
   return (
     <article id="postDetails">
+      <ToastContainer></ToastContainer>
       {isLoad ? (
         <Loader />
       ) : (
         <>
-          <FaArrowLeft
-            onClick={() => {
-              history.back();
-            }}
-          />
           <aside>
             <span>
-              {post?.cover ? (
-                <img src={post.cover} />
+              <p
+                onClick={() => {
+                  sessionStorage.setItem("userid", post?.userid);
+                  nav("/userProfile");
+                }}
+                style={{ backgroundImage: post?.postbg }}
+              >
+                {String(
+                  post.username?.at(0) + post.userlastname?.at(0)
+                ).toUpperCase()}
+              </p>
+              <i>
+                {post.username + " " + post.userlastname} / {post?.useremail}{" "}
+              </i>
+              {post?.postimage ? (
+                <img src={post.postimage} />
               ) : (
-                <div>{post.title?.slice(0, 50)}</div>
+                <div style={{ backgroundImage: post?.postbg }}>
+                  {post.posttitle?.slice(0, 50)}
+                </div>
               )}
             </span>
 
             <div>
-              {answer ? (
-                <article>
-                  <nav>
-                    <FaArrowLeft
-                      onClick={() => {
-                        setAnswer((prev) => false);
-                      }}
-                    />
-                    <h1>Responsendo...</h1>
-                  </nav>
-                  {isLoad1 ? (
-                    <Loader />
-                  ) : (
-                    <>
-                      {Array.isArray(comment) &&
-                        comment?.length > 0 &&
-                        comment?.map((c) => (
-                          <figure key={c.id}>
-                            <span>
-                              <div>
-                                {c.username?.at(0) + c.userlasname?.at(0)}
-                              </div>
-                              <aside>
-                                <b>
-                                  {c.username +
-                                    " " +
-                                    c.userlasname +
-                                    " ---> " +
-                                    c.email}
-                                </b>
-
-                                <i>7 Respostas</i>
-                                <span>
-                                  <FaRegTrashAlt />
-                                  <FaRegEdit
-                                    onClick={() => {
-                                      setPlaceHolder(
-                                        (prev) =>
-                                          "Response o comentário do usuário"
-                                      );
-                                      setAnswer((prev) => true);
-                                    }}
-                                  />
-                                </span>
-                              </aside>
-                            </span>
-                            <figcaption>{c.text}</figcaption>
-                          </figure>
-                        ))}
-                    </>
-                  )}
-                </article>
-              ) : (
-                <>
-                  {Array.isArray(comment) &&
-                    comment?.length > 0 &&
-                    comment?.map((c) => (
-                      <figure key={c.id}>
-                        <span>
-                          {c?.cover ? (
-                            <img src={c?.cover} />
-                          ) : (
+              <article>
+                {isLoad1 ? (
+                  <Loader />
+                ) : (
+                  <>
+                    {Array.isArray(comment) &&
+                      comment?.length > 0 &&
+                      comment?.map((c) => (
+                        <figure key={c.id}>
+                          <span>
                             <div>
                               {c.username?.at(0) + c.userlasname?.at(0)}
                             </div>
-                          )}
-                          <aside>
-                            <b>
-                              {c.username +
-                                " " +
-                                c.userlasname +
-                                " ---> " +
-                                c.email}
-                            </b>
-                            <i>7 Respostas</i>
-                            <span>
-                              <FaRegTrashAlt />
-                              <FaRegEdit
-                                onClick={() => {
-                                  setPlaceHolder(
-                                    (prev) => "Response o comentário do usuário"
-                                  );
-                                  setAnswer((prev) => true);
-                                }}
-                              />
-                            </span>
-                          </aside>
-                        </span>
-                        <figcaption>{c.text}</figcaption>
-                      </figure>
-                    ))}
-                </>
-              )}
+                            <aside>
+                              <b>
+                                {c.username +
+                                  " " +
+                                  c.userlasname}
+                              </b>
+                              {isMyPost(post.userid) && (
+                                <span>
+                                  <FaRegTrashAlt />
+                                </span>
+                              )}
+                            </aside>
+                          </span>
+                          <figcaption>{c.text}</figcaption>
+                        </figure>
+                      ))}
+                  </>
+                )}
+              </article>
               <form>
-                <input placeholder={placeholder} />
+                <input autoFocus placeholder={"Entre com o seu comentário"} />
                 <FaPaperPlane />
               </form>
             </div>
           </aside>
           <figcaption>
-            <h2>#{post.title}</h2>
-            <p>{post.description}</p>
+            <h2>#{post.posttitle}</h2>
+            <p>{post.posttext}</p>
             <article>
-              <button>
+              {post?.is_liked ? (
+                <FaHeart style={{ color: "var(--pink)" }} />
+              ) : (
                 <FaRegHeart />
-              </button>
+              )}
             </article>
             <b style={{ cursor: "pointer" }}>
-              {post.comments} Comentários & {post.likes} Curtidas
+              {post?.comment} Comentários & {post?.likes} Curtidas
             </b>
-            <article>
-              <button>Deletar</button>
-              <button>Editar</button>
-            </article>
+            {isMyPost(post.userid) && (
+              <article>
+                  <button onClick={async () => {
+                    
+                    toast.success("Deletado com sucesso!", {
+                      theme: "dark",
+                      position: "bottom-left",
+                    });
+                    await deletePost(post.postid);
+                    
+                    setLoad(true);
+                    setTimeout(() => {
+                    
+                    nav("/")
+                  },2000)
+                }}>Deletar</button>
+                <button>Editar</button>
+              </article>
+            )}
           </figcaption>
         </>
       )}

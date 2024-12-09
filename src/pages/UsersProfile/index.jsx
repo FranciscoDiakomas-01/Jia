@@ -6,8 +6,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import file1 from "../../assets/bg2.jpg";
 import Loader from "../../components/Loader";
-import { FaFacebook , FaInstagram, FaRegComment, FaRegHeart } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import {FaRegComment, FaRegHeart } from "react-icons/fa";
+import {useNavigate } from "react-router-dom";
 export default function UsersProfile() {
   const [isLoad, setLoad] = useState(true);
   const nav = useNavigate();
@@ -126,31 +126,7 @@ export default function UsersProfile() {
               <h1>{user.name + " " + user.lastname}</h1>
               <i>{user.email}</i>
               <p>{user.bio}</p>
-              <div>
-                {user?.facebook && (
-                  <Link to={user.facebook} target="_blank">
-                    <FaFacebook />
-                  </Link>
-                )}
-                {user?.isntagram && (
-                  <Link to={user.isntagram} target="_blank">
-                    <FaInstagram />
-                  </Link>
-                )}
-              </div>
-              <article>
-                <p>
-                  <b>{user.posts}</b> <p>Publicações</p>
-                </p>
-                <p>
-                  <b>{user.followers}</b> <p>Seguidores</p>
-                </p>
-                <p>
-                  <b>{user.followings}</b> <p>Seguindo</p>
-                </p>
-              </article>
             </aside>
-            <hr />
           </span>
           <section>
             {Array.isArray(posts) &&

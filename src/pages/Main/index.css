@@ -4,45 +4,59 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 10px;
     background-color: var(--black);
     width: 100%;
 }
 
-
-#main > div{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    padding: 30px 0px;
-    height: 90px;
-    position: sticky;
-    top: 0px;
-    background-color:var(--black);
-    z-index: 99;
+#main> div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  position: sticky;
+  padding-top: 0px;
+  top: 0px;
+  background-color: var(--black);
+  z-index: 99999;
 }
 
-#main > div form{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#main> div form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--black);
+  z-index: 9999;
+  gap: 10px;
 }
-#main > div form div{
-    width: 70%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+#main> div form div {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-#main > div form  button{
-    height: 100%;
-    position: absolute;
-    right: 5px;
-    font-size: 14pt;
-    background-color: transparent;
+
+#main> div form >button{
+    background-color: var(--pink);
     color: var(--white);
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13pt;
+}
+
+
+#main >  div form div button:first-of-type{
+  height: 100%;
+  position: absolute;
+  right: 5px;
+  font-size: 14pt;
+  background-color: transparent;
+  color: var(--white);
 }
 #main > section{
     width: 100%;
@@ -51,9 +65,8 @@
     align-items: center;
     background-color: var(--black);
     gap: 100px;
-    padding:20px;
-
 }
+
 
 #main > section figure{
     display: flex;
@@ -68,14 +81,8 @@
     word-wrap: break-word;
 }
 
-#main > section figure > img{
-    border-radius: 8px;
-    width: 600px;
-    height: 600px;
-}
 
-
-#main > section figure > span img , #main > section figure > span p{
+ #main > section figure > span p{
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -99,16 +106,19 @@
     gap:5px;
 }
 
-#main > section figure >div{
+#main > section figure >div , #main img{
     border-radius: 8px;
     width: 600px;
     height: 600px;
-    background-color: var(--blue);
     font-size: 18pt;
     align-items: center;
     text-align: center;
     display: flex;
     justify-content: center;
+}
+
+#main > section img{
+    object-fit: cover;
 }
 
 #main > section figure article{
@@ -126,4 +136,10 @@
     align-items: center;
     justify-content: center;
     font-size: 18pt;
+}
+
+#sentinela{
+    width: 100%;
+    position: relative;
+    height: 10px;
 }

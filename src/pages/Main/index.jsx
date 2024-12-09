@@ -1,130 +1,177 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import './index.css'
-import { FaRegComment, FaSearch } from "react-icons/fa";
-import profile from '../../assets/profile.jpg'
+import { FaHeart, FaRegComment, FaSearch, FaSync } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
-import file1 from '../../assets/bg2.jpg'
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Loader from "../../components/Loader";
+import { deslike, getPosts, getPostsByNameOrDescription, like, resetFilter } from '../../services/posts';
+import { toast, ToastContainer } from 'react-toastify';
 export default function Main() {
-const posts = [
-  {
-    id: crypto.randomUUID(),
-    title: "Descobrindo o mundo",
-    likes: 10,
-    comments: 20,
-    profile,
-    userName: "Francisco Diakomas",
-    userEmail: "francisco@gmail.com",
-    date: "1 m",
-    content:
-      "Óla pessoal hoje vamos falar sobre a minha trajectoria no dubai",
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "Descobrindo o mundo",
-    likes: 140,
-    comments: 40,
-    profile: file1,
-    userName: "Francisco Diakomas",
-    userEmail: "francisco@gmail.com",
-    date: "1 d",
-    content: "Óla pessoal",
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "Descobrindo o mundo",
-    likes: 140,
-    comments: 40,
-    userName: "Francisco Diakomas",
-    userEmail: "francisco@gmail.com",
-    date: "1 d",
-    content: "Óla pessoal",
-  },
-];
-  const nav = useNavigate()
+  const [posts, setPost] = useState([])
+  const [reload, setReload] = useState(false)
+  const nav = useNavigate();
   const [isLoad, setLoad] = useState(true);
-useEffect(() => {
-  setLoad(true);
-  AOS.init({
-    duration: 800,
-    easing: "ease-in-out",
-    once: false,
-    offset: 50,
-  });
-  setTimeout(() => {
-    setLoad(false);
-  }, 2000);
-}, []);
+  const [page , setPage] = useState(1)
+  const [lastPage, setLasPage] = useState(1);
+  const [ filter , setFilter ] = useState("")
+
+  useEffect(() => {
+    
+    if (page == 1) {
+      window.scrollTo({
+        behavior: "smooth",
+        top: -100000000000,
+        left: 0,
+      });
+    }
+    AOS.init({
+      duration: 800,
+      easing: "ease-in-out",
+      once: false,
+      offset: 50,
+    });
+    setTimeout(() => {
+      setLoad(false);
+    }, 1000);
+    async function get() {
+      if (filter.length != 0) {
+        const response = await getPostsByNameOrDescription(filter, page, 10);
+        if (page != 1) {
+          const newList = response?.data.data;
+          setPost((prev) => [...prev, ...newList]);
+          setLasPage((prev) => response?.data.laspage);
+          return;
+        }  
+        setPost((prev) => response?.data?.data);
+        setLasPage((prev) => response?.data.laspage);
+        return
+      }
+      const response = await getPosts(page, 10);
+      if (page != 1) {
+        const newList = response?.data.data
+        setPost((prev) => [...prev, ...newList]);
+        setLasPage((prev) => response?.data.laspage);
+        return
+      } else {
+        if (response?.data.data?.length == 0) {
+          toast.info("Ainda não há pulicações!", { theme: 'dark', position: 'top-left' })
+          setTimeout(() => {
+            nav("/posts")
+          },2000)
+          return
+        }
+        setPost((prev) => response?.data?.data);
+        setLasPage((prev) => response?.data.laspage);
+        return
+      }
+    }
+    get();
+  }, [reload, page]);
+  
+  useEffect(() => {
+    const Observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        //
+        setTimeout(() => {
+           if (page == lastPage) {
+          setPage((pev) => lastPage);
+          return
+        } else if (lastPage > page) {
+          const newPage = page + 1
+          setPage(newPage)
+          return
+        }
+        },1000)
+      }
+      });
+    Observer.observe(document.getElementById("sentinela"))
+    return () => Observer.disconnect()
+
+  }, [reload, lastPage , page])
+  
  return (
    <section id="main">
+     <ToastContainer />
      {isLoad ? (
        <Loader />
      ) : (
        <>
          <div>
-           <form>
+           <form
+             onSubmit={async (e) => {
+               e.preventDefault();
+               setPage((prev) => 1);
+               setReload((prev) => !prev);
+             }}
+           >
              <div>
-               <input placeholder="Pesquise pelo título da postagem" />
+               <input
+                 placeholder="Pesquise aqui"
+                 onChange={(e) => {
+                   setFilter((prev) => e.target.value);
+                 }}
+                 value={filter}
+               />
                <button>
                  <FaSearch />
                </button>
              </div>
+             {filter.length != 0 && (
+               <button
+                 onClick={() => {
+                   resetFilter(setFilter, setReload, setPage);
+                 }}
+               >
+                 <FaSync />
+               </button>
+             )}
            </form>
          </div>
          <section>
            {Array.isArray(posts) &&
              posts?.length > 0 &&
-             posts?.map((post) => (
-               <figure key={post.id} data-aos="slide-up">
+             posts?.map((post, index) => (
+               <figure key={index} data-aos="slide-up">
                  <span
                    onClick={() => {
                      nav("/userProfile");
                    }}
                  >
-                   {post?.profile ? (
-                     <>
-                       <img src={post.profile} alt="" />
-                     </>
-                   ) : (
-                     <>
-                       <p>{post.userName?.slice(0, 3)}</p>
-                     </>
-                   )}
+                   <p
+                     style={{
+                       backgroundImage: post?.postbg,
+                     }}
+                   >
+                     {post?.username?.at(0)?.toUpperCase() +
+                       post?.userlastname?.at(0)?.toUpperCase()}
+                   </p>
                    <div>
-                     <b>{post.userName}</b>
-                     <small>{post?.date}</small>
+                     <b>{post?.username + " " + post?.userlastname}</b>
+                     <small>{post?.postdate}</small>
                    </div>
                  </span>
-                 {post?.profile ? (
-                   <>
-                     <img
-                       src={post.profile}
-                       alt=""
-                       onClick={() => {
-                         nav("/postDetails");
-                       }}
-                     />
-                   </>
-                 ) : (
-                   <>
-                     <div
-                       onClick={() => {
-                         nav("/postDetails");
-                       }}
-                     >
-                       {post?.content}
-                     </div>
-                   </>
-                 )}
+
+                 <div
+                   onClick={() => {
+                     sessionStorage.setItem("postid", post.postid);
+                     nav("/postDetails");
+                   }}
+                   style={{
+                     backgroundImage: post?.postbg,
+                   }}
+                 >
+                   {post?.posttitle}
+                 </div>
                  <p
                    onClick={() => {
                      nav("/postDetails");
                    }}
                  >
-                   {post.content?.slice(0, 100)}{" "}
+                   {post.posttext?.slice(0, 100)}{" "}
                    <a
                      style={{ textDecoration: "underline", cursor: "pointer" }}
                    >
@@ -134,20 +181,54 @@ useEffect(() => {
                  </p>
                  <article>
                    <button>
-                     <FaRegHeart />
+                     {post?.is_liked ? (
+                       <FaHeart
+                         style={{ color: "var(--pink)" }}
+                         onClick={async () => {
+                           if (post.likes == 0) {
+                             return;
+                           }
+                           setPost((prev) => [
+                             ...prev,
+                             (prev[index].is_liked = false),
+                           ]);
+                           const oldPosts = [...posts];
+                           setPost(oldPosts);
+                           await deslike(post?.postid);
+                         }}
+                       />
+                     ) : (
+                       <FaRegHeart
+                         onClick={async () => {
+                           setPost((prev) => [
+                             ...prev,
+                             (prev[index].is_liked = true),
+                           ]);
+                           const oldPosts = [...posts];
+                           setPost(oldPosts);
+                           await like(post?.postid);
+                         }}
+                       />
+                     )}
                    </button>
                    <button>
                      <FaRegComment />
                    </button>
                  </article>
-                 <p style={{ cursor: "pointer" }}>
-                   {post.comments} Comentários & {post.likes} Curtidas{" "}
-                 </p>
+                 <p style={{ cursor: "pointer" }}>{post.comment} Comentários</p>
                </figure>
              ))}
          </section>
        </>
      )}
+     <section
+       style={{
+         height: isLoad && "100dvh",
+       }}
+     ></section>
+     <p id="sentinela">
+       {posts?.length != 0 && <>{lastPage != page && <Loader />}</>}
+     </p>
    </section>
  );
 }
