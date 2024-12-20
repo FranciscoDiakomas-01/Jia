@@ -168,7 +168,8 @@ export default function Main() {
                  </div>
                  <p
                    onClick={() => {
-                     nav("/postDetails");
+                     sessionStorage.setItem("postid", post.postid);
+                   nav("/postDetails");
                    }}
                  >
                    {post.posttext?.slice(0, 100)}{" "}

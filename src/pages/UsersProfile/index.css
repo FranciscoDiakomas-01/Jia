@@ -43,12 +43,6 @@
     background-color: var(--black);
     padding: 4px 0;
 }
-#usersProfile > span hr{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    left: 0;
-}
 #usersProfile > span h1{
     font-size: 16pt;
     margin-top: 20px;
@@ -61,7 +55,6 @@
 }
 
 #usersProfile > span aside article{
-    width: 100%;
     display: flex;
     justify-content: space-between;
 }
@@ -77,6 +70,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 30px 10px;
+    overflow: hidden;
 }
 
 

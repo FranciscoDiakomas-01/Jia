@@ -1,6 +1,6 @@
 
 import './index.css'
-import { FaHeart, FaRegComment, FaSearch } from "react-icons/fa";
+import { FaHeart, FaRegComment } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
 import AOS from "aos";
@@ -13,8 +13,6 @@ export default function Posts() {
   const nav = useNavigate()
   const [page , setPage] = useState(1)
   const [lasPage , setLastPage] = useState();
-  const [resload , setReload] = useState(false);
-  const [filter, setFilter] = useState();
   const [myPost , setMyPost] = useState([])
   useEffect(() => {
       async function get() {
@@ -34,7 +32,7 @@ export default function Posts() {
       setTimeout(() => {
         setLoad(false)
       },2000)
-    }, [page , resload]);
+    }, [page]);
 
  return (
    <section id="post">
@@ -44,14 +42,6 @@ export default function Posts() {
        <>
          <nav>
            <p>Meus Post</p>
-           <form>
-             <div>
-               <input placeholder="Pesquise as sua postagens pelo título" />
-               <button>
-                 <FaSearch />
-               </button>
-             </div>
-           </form>
            <button
              onClick={() => {
                nav("/createPost");

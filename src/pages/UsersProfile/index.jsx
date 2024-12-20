@@ -102,7 +102,7 @@ export default function UsersProfile() {
       duration: 800,
       easing: "ease-in-out",
       once: false,
-      offset: 50,
+      offset: 40,
     });
     setTimeout(() => {
       setLoad(false);
