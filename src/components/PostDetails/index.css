@@ -1,180 +1,228 @@
+#postDetails {
+  width: 100%;
+  position: relative;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  gap: 30px;
+  min-height: 95dvh;
+  padding-top: 20px;
+}
+
+#postDetails > svg {
+  top: 0px;
+  left: 20px;
+  font-size: 18pt;
+  color: var(--green);
+  height: 40px;
+}
+
+#postDetails > aside {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  gap: 20px;
+}
+#postDetails > aside > * {
+  width: 50%;
+}
+#postDetails > aside > span {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  word-wrap: break-word;
+}
+
+#postDetails > aside > div button{
+  background-color: var(--pink);
+  color: var(--white);
+  width: 100px;
+  place-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+#postDetails  p {
+  display: flex;
+  gap: 10px;
+}
+#postDetails > aside > div {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  border-radius: 10px;
+  padding: 10px 15px;
+  overflow-y: auto;
+  gap: 40px;
+  position: relative;
+  margin-top: 40px;
+}
+
+#postDetails > aside > div::-webkit-scrollbar-thumb{
+  background-color: var(--black);
+}
+
+#postDetails > aside > div form {
+  position: sticky;
+  bottom: 0;
+  background-color: var(--black);
+  z-index: 99;
+  width: 100%;
+  position: sticky;
+  top: -10px;
+  padding: 5px 10px;
+  
+}
+
+#postDetails > aside > div form svg {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  color: var(--green);
+  font-size: 14pt;
+}
+
+#postDetails > aside > div figure {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+#postDetails > aside > div figure aside {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#postDetails > aside > div figure aside > span {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+#postDetails > aside > div figure aside svg {
+  color: var(--pink);
+  font-size: 15pt;
+}
+#postDetails > aside > div figure aside svg:last-of-type {
+  color: var(--blue);
+}
+#postDetails > aside > div figure figcaption {
+  background-color: rgba(255, 255, 255, 0.115);
+  min-height: 100px;
+  padding: 4px;
+  padding: 5px;
+  word-wrap: break-word;
+  position: relative;
+}
+
+#postDetails > aside > div figure > span > div {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  text-transform: uppercase;
+}
+#postDetails > aside > span > div {
+  height: 550px;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18pt;
+  word-wrap: break-word;
+}
+
+#postDetails > aside > span > p:first-of-type {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
 #postDetails{
-    width: 100%;
-    position: relative;
-    display: flex;
-    gap: 10px;
+  position: relative;
+}
+#postDetails >  figcaption{
+  display: flex;
+  width: 100%;
+  padding: 90px 10px;
+  padding-top: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  background-color: var(--black);
+}
+#postDetails  figcaption button{
+  width: 120px;
+  color: var(--white);
+  background-color: var(--pink);
+}
+#postDetails  figcaption button:last-of-type{
+  background-color: var(--blue);
+}
+
+#postDetails > aside > div figure > span {
+  width: 100%;
+  display: flex;
+  gap: 40px;
+}
+
+@media screen and (max-width: 1024px) {
+
+  #postDetails >  figcaption{
+  padding: 90px 20px;
+  padding-top: 15px;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 40px;
+  position: fixed;
+  z-index: 999;
+  bottom: 0px;
+  justify-content: space-between;
+}
+  #postDetails {
+    padding-top: 30px;
+  }
+  #postDetails > aside > div figure aside {
     flex-direction: column;
-    gap: 30px;
-    min-height: 95dvh;
-    padding-top: 20px;
-}
-
-#postDetails > svg{
-    top: 0px;
-    left: 20px;
-    font-size: 18pt;
-    color: var(--green);
-    height: 40px;
-}
-
-#postDetails  > aside{
-    display: flex;
-    gap: 30px;
-    width: 100%;
-    justify-content: space-between;
-    display: flex;
-    gap: 20px;
-}
-#postDetails  > aside > *{
-    width: 50%;
-}
-#postDetails  > aside > span{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    word-wrap: break-word;
-}
-
-#postDetails  > aside > div{
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    height: 550px;
-    border-radius: 10px;
-    padding: 0 15px;
-    padding-top: 50px;
-    overflow-y: auto;
-    gap: 40px;
-    position: relative;
-    overflow-x: hidden;
-    justify-content: space-between;
-}
-#postDetails  > aside  nav{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14pt;
-    position: sticky;
-    top: 0;
-    background-color: var(--black);
-    width: 100%;
-    z-index: 999;
-    padding: 20px 10px;
-}
-#postDetails  > aside > div form{
-    position: sticky;
-    bottom: 0;
-    background-color: var(--black);
-    z-index: 9;
-    width: 100%;
-}
-
-#postDetails  > aside > div form svg{
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    color: var(--green);
-    font-size: 14pt;
-}
-
-#postDetails  > aside > div figure{
+    align-items: start;
+  }
+  #postDetails > aside {
     display: flex;
     flex-direction: column;
+    gap: 0;
+  }
+  #postDetails > aside > span {
     width: 100%;
-    gap: 30px;
-}
-
-#postDetails  > aside > div figure aside{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-#postDetails  > aside > div figure aside > span{
-    display: flex;
-    justify-content: start;
-    gap: 20px;
-    align-items: center;
-}
-#postDetails  > aside > div figure aside svg{
-    color: var(--pink);
-    font-size: 15pt;
-}
-#postDetails  > aside > div figure aside svg:last-of-type{
-    color: var(--blue);
-}
-#postDetails  > aside > div figure figcaption{
-    background-color: rgba(255, 255, 255, 0.115);
-    height: 100px;
-    border-radius: 5px;
-    padding: 4px;
-    word-wrap: break-word;
-}
-#postDetails  > aside > div figure > span > div{
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-}
-#postDetails  > aside > span  > div{
-    height: 550px;
+    padding: 30px 5px;
+  }
+  #postDetails > aside > span > div {
+    height: 400px;
     width: 100%;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--green);
-    font-size: 18pt;
-    word-wrap: break-word;
-}
+  }
 
-#postDetails  > aside > span  > p{
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
+   #postDetails > aside > div figure{
+    margin-top: 20px;
+   }
 
-#postDetails  > figcaption {
-    display: flex;
+   #postDetails > aside > div form{
+    padding: 3px;
+   }
+  #postDetails > aside > div {
     width: 100%;
-    flex-direction: column;
-    gap: 20px;
-}
-#postDetails  > figcaption p{
-    font-size: 12pt;
-}
-#postDetails  > figcaption article{
-    width: 100%;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-#postDetails  > figcaption article:first-of-type button{
- background-color: transparent;
-    color: var(--white);
-    font-size: 18pt;
-    width: 50px;
-}
-
-#postDetails  > figcaption article:last-of-type button{
-    width: 30%;
-    background-color: var(--pink);
-    color: var(--white);
-    height: 45px;
-}
-
-#postDetails  > figcaption article:last-of-type button:last-of-type{
-    background-color: var(--blue);
-}
-
-
-#postDetails  > aside > div figure > span{
-    width: 100%;
-    display: flex;
-    gap: 40px;
+    height: auto;
+    max-height: auto;
+    padding: 5px;
+    margin-bottom: 170px;
+  }
 }

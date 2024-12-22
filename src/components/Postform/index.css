@@ -6,10 +6,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow-x: hidden;
 }
 
 #createPost form{
-
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -74,4 +74,15 @@
     color: var(--green);
     font-size: 18pt;
     font-weight: bold;
+}
+
+@media screen and (max-width : 1024px) {
+    #createPost{
+        align-items: center;
+        justify-content: center;
+    }
+    #createPost form{
+        width: 90%;
+        justify-content: center;
+    }
 }

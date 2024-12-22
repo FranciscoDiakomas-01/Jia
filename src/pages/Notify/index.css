@@ -1,35 +1,62 @@
-#notifications{
+#notifications {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 10px;
+  overflow: hidden;
+  padding-top: 40px;
+}
+
+#notifications figure {
+  width: 90%;
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 5px;
+  align-items: center;
+}
+
+#notifications figure button {
+  width: 60px;
+  background-color: var(--green);
+  color: var(--white);
+}
+
+#notifications figure div {
+  width: 60px;
+  height: 60px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--blue);
+  color: var(--white);
+}
+@media screen and (max-width: 1024px) and (min-width: 721px) {
+  #notifications figure {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    gap: 10px;
+  }
+  #notifications {
+    overflow: hidden;
+    padding: 70px 0;
+    gap: 20px;
+  }
 }
-
-#notifications figure{
+@media screen and (max-width: 720px) {
+  #notifications {
+    overflow: hidden;
+    align-items: center;
+    padding: 70px 0;
+    gap: 20px;
+  }
+  #notifications figure button {
     width: 90%;
-    display: flex;
-    gap: 50px;
-    justify-content: space-between;
-    padding: 20px;
-    border-radius: 5px;
-    align-items: center;
-
-}
-
-#notifications figure button{
-    width: 60px;
-    background-color: var(--green);
-    color: var(--white);
-}
-
-#notifications figure div{
-    width: 60px;
-    height: 60px;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: var(--blue);
-    color: var(--white);
+  }
+  #notifications figure {
+    width: 95%;
+    flex-direction: column;
+    gap: 15px;
+  }
 }

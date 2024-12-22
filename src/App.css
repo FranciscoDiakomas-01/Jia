@@ -37,8 +37,9 @@ svg{
 button:active , svg:active{
   scale: 0.5;
 }
-#app > nav{
+#app > nav:first-of-type{
   height: 100%;
+  display: flex;
   top: 0;
   width:20%;
   padding: 10px ;
@@ -49,7 +50,9 @@ button:active , svg:active{
   height: 100px;
 }
 
-
+#mobilenav{
+  display: none;
+}
 #app > nav:first-of-type ol{
   display: flex;
   flex-direction: column;
@@ -140,4 +143,62 @@ button:active , svg:active{
   right: 0;
   color: var(--white);
   top: 15px;
+ }
+
+#logo{
+  display: none;
+}
+ @media screen and (max-width : 1024px){
+  
+  #logo{
+    display: flex;
+    position: fixed;
+    top: -4px;
+    left: 0;
+    z-index: 99999999999;
+    background-color: var(--black);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+#logo span{
+  width: 100%;
+  position: fixed;
+  left: 20px;
+  color: var(--green);
+  font-size: 14pt;
+}
+  #logo img{
+    height: 70px;
+  }
+   #app > nav:first-of-type{
+    display: none;
+   }
+    #app > nav:last-of-type{
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    background-color: var(--black);
+    padding: 25px 10px;
+    z-index: 9999;
+   }
+
+   
+   #app > nav:last-of-type a {
+    color: var(--green);
+    font-size: 15pt;
+   }
+   #app > nav:last-of-type ol{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+   }
+   #app > section{
+    width: 100%;
+    padding:  10px;
+   }
  }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import "./index.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -28,7 +29,6 @@ export default function PostForm() {
   
   return (
     <article id="createPost">
-      <ToastContainer/>
       {isLoad ? (
         <Loader />
       ) : (
@@ -57,8 +57,7 @@ export default function PostForm() {
                 const response = await createPost(body)
                 if (response?.data == "created") {
                    toast.success("Cadastrado com sucesso!", {
-                     theme: "dark",
-                     position: "bottom-right",
+                     theme: "dark"
                    });
                   setTimeout(() => {
                     setAdd(false)

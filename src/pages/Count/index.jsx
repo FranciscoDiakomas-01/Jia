@@ -6,11 +6,24 @@ import { FiLock } from "react-icons/fi";
 import { IoText } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import { getUserbyId} from '../../services/users'
 import { MdOutlineAttachEmail } from "react-icons/md";
+import { updateMyProfile } from "../../services/acount.js";
 export default function Acount() {
   const [isLoad, setLoad] = useState(true);
   const [active, setActive] = useState(0);
+  const [user , setUser] = useState()
+  const [reset, setResest] = useState({
+    email : "",
+    password : "",
+    newPassword : ""
+  })
   useEffect(() => {
+    async function get() {
+      const data = await getUserbyId(localStorage.getItem("uuid"));
+      setUser(data?.data)
+    }
+    get()
     setLoad(true);
     AOS.init({
       duration: 800,
@@ -22,9 +35,15 @@ export default function Acount() {
       setLoad(false);
     }, 2000);
   }, []);
-
+  useEffect(()=>{
+    setResest({
+      email: "",
+      password: "",
+      newPassword: "",
+    });
+  },[active])
   return (
-    <article id="createPost">
+    <article id="acount">
       {isLoad ? (
         <Loader />
       ) : (
@@ -52,25 +71,34 @@ export default function Acount() {
             >
               Meus Dados
             </button>
-            <button
-              style={{
-                color: "var(--pink)",
-                opacity: active == 2 && 1,
-              }}
-              onClick={() => {
-                setActive(2);
-              }}
-            >
-              Deletar
-            </button>
           </nav>
 
           {active == 0 ? (
-            <form data-aos="fade-left">
+            <form data-aos="fade-left" onSubmit={async(e)=>{
+              e.preventDefault()
+
+              const body = {
+                name: user.name,
+                lastname: user.lastname,
+                email: user.email,
+                password: user.password,
+                bio: user.bio,
+              };
+              const response = await updateMyProfile(body)
+              console.log(response)
+            }}>
               <div>
                 <FaRegUser />
                 <label htmlFor="name">Nome</label>
-                <input id="name" placeholder="Entre com o seu nome" required />
+                <input
+                  id="name"
+                  placeholder="Entre com o seu nome"
+                  required
+                  value={user.name}
+                  onChange={(e) => {
+                    setUser((prev) => ({ ...prev, name: e.target.value }));
+                  }}
+                />
               </div>
               <div>
                 <FaRegUser />
@@ -79,12 +107,23 @@ export default function Acount() {
                   id="lastname"
                   placeholder="Entre com o seu sobrenome"
                   required
+                  value={user.lastname}
+                  onChange={(e) => {
+                    setUser((prev) => ({ ...prev, lastname: e.target.value }));
+                  }}
                 />
               </div>
               <div>
                 <IoText />
                 <label htmlFor="bio">Biografia</label>
-                <input id="bio" placeholder="Entre com o sua biografia" />
+                <input
+                  id="bio"
+                  placeholder="Entre com o sua biografia"
+                  value={user.bio}
+                  onChange={(e) => {
+                    setUser((prev) => ({ ...prev, bio: e.target.value }));
+                  }}
+                />
               </div>
               <div>
                 <MdOutlineAttachEmail />
@@ -94,6 +133,10 @@ export default function Acount() {
                   placeholder="Entre com o seu email"
                   required
                   type="email"
+                  value={user.email}
+                  onChange={(e) => {
+                    setUser((prev) => ({ ...prev, email: e.target.value }));
+                  }}
                 />
               </div>
               <div>
@@ -104,40 +147,9 @@ export default function Acount() {
                   placeholder="Entre com o sua senha"
                   type="password"
                   required
-                />
-              </div>
-              <button>Salvar Alterações</button>
-            </form>
-          ) : active == 1 ? (
-            <form data-aos="fade-left">
-              <div>
-                <MdOutlineAttachEmail />
-                <label htmlFor="email">Email</label>
-                <input
-                  id="email"
-                  placeholder="Entre com o seu email"
-                  required
-                  type="email"
-                />
-              </div>
-              <div>
-                <FiLock />
-                <label htmlFor="password">Senha</label>
-                <input
-                  id="password"
-                  placeholder="Entre com o sua senha"
-                  type="password"
-                  required
-                />
-              </div>
-              <div>
-                <FiLock />
-                <label htmlFor="newPass">Nova Senha</label>
-                <input
-                  id="newPass"
-                  placeholder="Entre com o sua senha"
-                  type="password"
-                  required
+                  onChange={(e) => {
+                    setUser((prev) => ({ ...prev, password: e.target.value }));
+                  }}
                 />
               </div>
               <button>Salvar Alterações</button>
@@ -152,6 +164,10 @@ export default function Acount() {
                   placeholder="Entre com o seu email"
                   required
                   type="email"
+                  value={reset?.email}
+                  onChange={(e) => {
+                    setResest((prev) => ({ ...prev, email: e.target.value }));
+                  }}
                 />
               </div>
               <div>
@@ -162,9 +178,30 @@ export default function Acount() {
                   placeholder="Entre com o sua senha"
                   type="password"
                   required
+                  value={reset?.password}
+                  onChange={(e) => {
+                    setResest((prev) => ({
+                      ...prev,
+                      password: e.target.value,
+                    }));
+                  }}
                 />
               </div>
-              <button style={{backgroundColor : 'var(--pink)'}}>Deletar minha Conta</button>
+              <div>
+                <FiLock />
+                <label htmlFor="newPass">Nova Senha</label>
+                <input
+                  id="newPass"
+                  placeholder="Entre com o sua senha"
+                  type="password"
+                  required
+                  value={reset?.newPassword}
+                  onChange={(e) => {
+                    setResest((prev) => ({ ...prev, newPassword: e.target.value }));
+                  }}
+                />
+              </div>
+              <button>Salvar Alterações</button>
             </form>
           )}
         </>

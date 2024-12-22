@@ -66,11 +66,13 @@ export default function Posts() {
                      {post?.posttitle?.slice(0, 10)}...
                    </div>
                    <figcaption>
+
                      <span>
                        <div>
                          <FaRegComment />
                          <h1>{post.comment}</h1>
                        </div>
+
                        <div>
                          {post.is_liked ? (
                            <FaHeart style={{ color: "var(--pink)" }} />
@@ -79,6 +81,7 @@ export default function Posts() {
                          )}
                          <h1>{post.likes}</h1>
                        </div>
+                       
                      </span>
                      <p>{post?.posttext?.slice(0, 60)}...</p>
                      <p>Clique para ver mais detalhes</p>

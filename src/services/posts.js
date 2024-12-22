@@ -133,7 +133,7 @@ export async function deletePost(postid) {
            }),
          });
     const response = await API.json()
-     return await response
+     return  response
     } catch (error) {
         return error
     }

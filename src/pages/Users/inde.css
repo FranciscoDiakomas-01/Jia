@@ -1,4 +1,4 @@
-#followers{
+#users{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -6,7 +6,27 @@
   position: relative;
 }
 
-#followers> div {
+#users > div form > button {
+  background-color: var(--pink);
+  color: var(--white);
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13pt;
+}
+
+#users > button{
+  width: 200px;
+  background-color: var(--green);
+  color: var(--white);
+  display: flex;
+  place-self: center;
+  align-items: center;
+  justify-content: center;
+}
+
+#users> div {
   width: 100%;
   display: flex;
   align-items: center;
@@ -18,13 +38,14 @@
   z-index: 99;
 }
 
-#followers> div form {
+#users> div form {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
 }
-#followers> div form div {
+#users> div form div {
   width: 70%;
   display: flex;
   align-items: center;
@@ -32,7 +53,7 @@
   position: relative;
 }
 
-#followers> div form button {
+#users> div form  div button {
   height: 100%;
   position: absolute;
   right: 5px;
@@ -42,7 +63,7 @@
 }
 
 
-#followers> article {
+#users> article {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -54,11 +75,11 @@
   padding: 10px 0;
   place-items: center;
 }
-#followers> article img,
-#followers> article figure > span div {
+#users> article figure > span div {
   height: 100px;
   width: 100px;
   border-radius: 50%;
+  text-transform: uppercase;
 }
 
 article figure > span div {
@@ -68,7 +89,7 @@ article figure > span div {
   background-color: var(--blue);
 }
 
-#followers> article figure {
+#users> article figure {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -79,34 +100,34 @@ article figure > span div {
   padding: 20px;
   border-radius: 10px;
 }
-#followers> article figure > div {
+#users> article figure > div {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 40px;
 }
-#followers> article figure > span {
+#users> article figure > span {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
 }
 
-#followers> article figure > aside {
+#users> article figure > aside {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
 }
-#followers> article figure > aside div {
+#users> article figure > aside div {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
 }
-#followers> article button {
+#users> article button {
   width: 100%;
   border: none;
   height: 40px;
@@ -118,3 +139,46 @@ article figure > span div {
   justify-content: center;
   gap: 6px;
 }
+
+
+@media screen and (max-width : 1024px) and (min-width : 721px) {
+
+  #users> article{
+    grid-template-columns: 1fr  1fr;
+    padding: 0 20px;
+    margin-top: 50px;
+    padding-bottom: 40px;
+  }
+
+  #users> div {
+    top: 75px;
+  }
+  #users> div form div{
+    width: 90%;
+  }
+}
+
+@media screen and (max-width : 720px) {
+
+
+  #users > button{
+  width: 70%;
+}
+  #users> article{
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+    margin-top: 50px;
+    padding-bottom: 40px;
+  }
+
+  #users> div {
+    top: 60px;
+  }
+  #users> div form{
+    gap: 10px;
+  }
+  #users> div form div{
+    width:100%;
+  }
+}
+
