@@ -58,6 +58,18 @@
     justify-content: space-between;
 }
 
+
+#usersProfile > span aside div{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#usersProfile > span aside div span{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 #usersProfile > span aside article{
     display: flex;
     justify-content: space-between;

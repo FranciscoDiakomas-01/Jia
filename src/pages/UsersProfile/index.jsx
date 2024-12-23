@@ -7,6 +7,7 @@ import Loader from "../../components/Loader";
 import { FaHeart, FaRegComment, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { getUserbyId } from "../../services/users";
+import formatToSocialMidiaNumbers from "../../services/util";
 export default function UsersProfile() {
   const [isLoad, setLoad] = useState(true);
   const nav = useNavigate();
@@ -62,11 +63,19 @@ export default function UsersProfile() {
       ) : (
         <>
           <span>
-            <div id="profile">{user?.name.at(0) + "" + user?.lastname.at(0)}</div>
+            <div id="profile">
+              {user?.userdata?.name.at(0) + "" + user?.userdata?.lastname.at(0)}
+            </div>
             <aside>
-              <h1>{user?.name + " " + user?.lastname}</h1>
-              <i>{user?.email}</i>
-              <p>{user?.bio}</p>
+              <h1>{user?.userdata?.name + " " + user?.lastname}</h1>
+              <i>{user?.userdata?.email}</i>
+              <p>{user?.userdata?.bio}</p>
+              <div>
+                <span>
+                  <strong>Publicações</strong>
+                  {formatToSocialMidiaNumbers(user?.totalPosts)}
+                </span>
+              </div>
             </aside>
           </span>
           <section>

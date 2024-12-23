@@ -4,6 +4,7 @@ import "./index.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Loader from "../../components/Loader";
+import CommentEditForm from "../CommentEditForm";
 import { useEffect, useState } from "react";
 import {
   FaHeart,
@@ -12,7 +13,13 @@ import {
   FaRegHeart,
   FaRegTrashAlt,
 } from "react-icons/fa";
-import {deletePost, getPostById, isMyPost } from "../../services/posts";
+import {
+  deletePost,
+  deslike,
+  getPostById,
+  isMyPost,
+  like,
+} from "../../services/posts";
 import { useNavigate } from "react-router-dom";
 import {
   createComment,
@@ -29,10 +36,11 @@ export default function PostDetails() {
   const [lastPage, setLasPage] = useState();
   const [page, setPage] = useState(1);
   const [newComment, setNewComment] = useState("");
+  const  [updateComment , setUpdateComment] = useState(false)
+  const [commentText , setCommentText] = useState("")
   const nav = useNavigate();
-  
-  useEffect(() => {
 
+  useEffect(() => {
     setLoad(true);
     if (!postid || postid == null || postid == undefined) {
       nav("/");
@@ -54,15 +62,14 @@ export default function PostDetails() {
     async function getData() {
       const response = await getPostById(postid);
       if (!response?.data?.data?.postid) {
-        toast.error("Este post foi eliminado!" , {theme : 'dark'});
-        setTimeout(()=>{
-          nav("/")
-        },2000)
+        toast.error("Este post foi eliminado!", { theme: "dark" });
+        setTimeout(() => {
+          nav("/");
+        }, 2000);
         return;
-      }else{
+      } else {
         setPost(response?.data.data);
       }
-      
     }
     async function getComment() {
       const comentget = await getCommentByPostId(postid, page);
@@ -73,18 +80,17 @@ export default function PostDetails() {
         return;
       } else {
         const prevData = Array(...comment).concat(comentget?.data?.data);
-        setComment(prevData)
+        setComment(prevData);
         return;
       }
     }
-    const interval = setInterval(()=>{
-       getComment(); 
-       getData();
-    }, 1000)
-   
-   
+    const interval = setInterval(() => {
+      getComment();
+      getData();
+    }, 1000);
+
     return () => {
-      clearInterval(interval)
+      clearInterval(interval);
     };
   }, [page]);
 
@@ -96,13 +102,18 @@ export default function PostDetails() {
       postid,
       text,
     };
-   await createComment(body);
+    await createComment(body);
   }
   return (
     <article id="postDetails">
-      <ToastContainer style={{
-        zIndex : '9999999999'
-      }}/>
+      {
+        updateComment && <CommentEditForm close={setUpdateComment}  text={commentText}/>
+      }
+      <ToastContainer
+        style={{
+          zIndex: "9999999999",
+        }}
+      />
       {isLoad ? (
         <Loader />
       ) : (
@@ -131,9 +142,18 @@ export default function PostDetails() {
               </div>
               <article>
                 {post?.is_liked ? (
-                  <FaHeart style={{ color: "var(--pink)" }} />
+                  <FaHeart
+                    style={{ color: "var(--pink)" }}
+                    onClick={async () => {
+                      await deslike(post?.postid);
+                    }}
+                  />
                 ) : (
-                  <FaRegHeart />
+                  <FaRegHeart
+                    onClick={async () => {
+                      await like(post?.postid);
+                    }}
+                  />
                 )}
               </article>
               <b style={{ cursor: "pointer" }}>
@@ -197,7 +217,12 @@ export default function PostDetails() {
                               ) : null}
                               {isMyComent(c.userid) ? (
                                 <span>
-                                  <FaRegEdit />
+                                  <FaRegEdit onClick={()=>{
+                                    // eslint-disable-next-line no-unused-vars
+                                    setCommentText(prev => c.text)
+                                    sessionStorage.setItem("commentid" , c.commentid);
+                                    setUpdateComment(true)
+                                  }}/>
                                 </span>
                               ) : null}
                             </p>
@@ -224,14 +249,21 @@ export default function PostDetails() {
           </aside>
           {isMyPost(post?.userid) && (
             <figcaption>
-              <button onClick={async() => {
-                setLoad(true)
-                await deletePost(post?.postid)
-                setTimeout(()=>{
-                  nav("/")
-                },1000)
-              }}>Eliminar</button>
-              <button>Editar</button>
+              <button
+                onClick={async () => {
+                  setLoad(true);
+                  await deletePost(post?.postid);
+                  setTimeout(() => {
+                    nav("/");
+                  }, 1000);
+                }}
+              >
+                Eliminar
+              </button>
+              <button onClick={()=>{
+                sessionStorage.setItem("postid", post.postid);
+                nav("/updatePost");
+              }}>Editar</button>
             </figcaption>
           )}
         </>

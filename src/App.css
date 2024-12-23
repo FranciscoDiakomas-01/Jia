@@ -148,6 +148,43 @@ button:active , svg:active{
 #logo{
   display: none;
 }
+
+
+
+
+#app form input{
+    width: 100%;
+    height: 50px;
+    outline: none;
+    font-size: 11pt;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.115);
+    padding-left: 10px;
+    border-radius: 5px;
+    color: var(--white);
+}
+#app form textarea{
+    resize: none; width: 100%;
+    height: 300px;
+    outline: none;
+    font-size: 11pt;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.115);
+    padding-left: 10px;
+    border-radius: 5px;
+    color: var(--white);
+    padding: 5px;
+}
+
+#app form button{
+    background-color: var(--green);
+    color: var(--white);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
  @media screen and (max-width : 1024px){
   
   #logo{
@@ -171,6 +208,7 @@ button:active , svg:active{
 }
   #logo img{
     height: 70px;
+    cursor: pointer;
   }
    #app > nav:first-of-type{
     display: none;

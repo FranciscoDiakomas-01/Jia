@@ -1,7 +1,7 @@
 import { Link , Outlet, useNavigate} from "react-router-dom";
 import "./App.css";
 import logo from './assets/logo.png'
-import { FaUsers, FaComment, FaUser, FaHome, FaBell } from "react-icons/fa";
+import { FaUsers, FaComment, FaUser, FaHome } from "react-icons/fa";
 import { LuSettings } from "react-icons/lu";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
@@ -34,12 +34,7 @@ export function App() {
       title: "Configurações",
       path: "/acount",
       icon: <LuSettings />,
-    },
-    {
-      title: "Notificações",
-      path: "/notifications",
-      icon: <FaBell />,
-    },
+    }
   ];
   return (
     <main id="app">
@@ -49,13 +44,9 @@ export function App() {
         }}
       ></ToastContainer>
       <div id="logo">
-        <span >
-          <FaBell onClick={()=>{
-            nav("/notifications");
-          }}/>
-          <sup>10</sup>
-        </span>
-        <img src={logo} alt="logo" />
+        <img src={logo} alt="logo" onClick={()=>{
+          nav("/")
+        }}/>
       </div>
       <nav id="navBar">
         <img src={logo} alt="logo" />
@@ -80,7 +71,6 @@ export function App() {
                 setActive(index);
               }}
             >
-              {index == navigations.length - 1 && <sup>2</sup>}
               {nav.icon}
               <p>{nav.title}</p>
             </Link>
@@ -105,8 +95,7 @@ export function App() {
               to={nav.path}
               style={{
                 color: active == index && "var(--pink)",
-                opacity: active == index ? 1 : 0.6,
-                display : index == navigations.length - 1 && "none"
+                opacity: active == index ? 1 : 0.6
               }}
               key={index}
               onClick={() => {

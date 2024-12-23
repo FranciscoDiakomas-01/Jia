@@ -1,0 +1,34 @@
+
+
+#EditComment{
+    position: fixed;
+    width: 100vw;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff00;
+    backdrop-filter: blur(40px);
+    z-index: 9999999999999999999999999;
+    top: 0;
+    left: 0;
+
+}
+
+#EditComment form{
+    width:50%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#EditComment form button{
+    width: 100%;
+}
+
+@media screen and (max-width : 720px) {
+    #EditComment form{
+    width:90%;
+    margin-right: 10px;
+}
+}

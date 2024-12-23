@@ -57,3 +57,23 @@ export async function deleteComment(commentId , postid = -1) {
     }
    
 }
+
+export async function updatecommetnById(commentId , body) {
+  
+    try {
+        const API = await fetch(`http://localhost:3000/comment/${commentId}`, {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: localStorage.getItem("token"),
+          },
+          method: "PUT",
+          body: JSON.stringify(body),
+        });
+        const response = await API.json()
+        console.log(body, response);
+        return response?.data == "updated";
+    } catch (error) {
+        return false
+    }
+   
+}

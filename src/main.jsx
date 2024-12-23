@@ -10,10 +10,10 @@ import PostForm from './components/Postform/index.jsx';
 import PostDetails from './components/PostDetails/index.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Acount from './pages/Count/index.jsx';
-import Notify from './pages/Notify/index.jsx';
 import Login from './pages/Login/index.jsx';
 import 'react-toastify/ReactToastify.css'
 import SignIn from './pages/Login/signin.jsx';
+import PostEditForm from './components/PostEditForm/index.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,8 +49,8 @@ const router = createBrowserRouter([
         element: <Acount />,
       },
       {
-        path: "/notifications",
-        element: <Notify />,
+        path: "/updatePost",
+        element: <PostEditForm />,
       },
     ],
   },

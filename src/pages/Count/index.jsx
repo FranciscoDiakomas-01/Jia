@@ -8,7 +8,8 @@ import { FaRegUser } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { getUserbyId} from '../../services/users'
 import { MdOutlineAttachEmail } from "react-icons/md";
-import { updateMyProfile } from "../../services/acount.js";
+import { resetPassword, updateMyProfile } from "../../services/acount.js";
+import { toast, ToastContainer } from "react-toastify";
 export default function Acount() {
   const [isLoad, setLoad] = useState(true);
   const [active, setActive] = useState(0);
@@ -21,7 +22,8 @@ export default function Acount() {
   useEffect(() => {
     async function get() {
       const data = await getUserbyId(localStorage.getItem("uuid"));
-      setUser(data?.data)
+      setUser(data?.data.userdata);
+      setResest((prev) => ({ ...prev, email: data?.data.userdata.email }));
     }
     get()
     setLoad(true);
@@ -44,6 +46,11 @@ export default function Acount() {
   },[active])
   return (
     <article id="acount">
+      <ToastContainer
+        style={{
+          zIndex: "99999999999999999999999999999999999",
+        }}
+      />
       {isLoad ? (
         <Loader />
       ) : (
@@ -74,19 +81,27 @@ export default function Acount() {
           </nav>
 
           {active == 0 ? (
-            <form data-aos="fade-left" onSubmit={async(e)=>{
-              e.preventDefault()
-
-              const body = {
-                name: user.name,
-                lastname: user.lastname,
-                email: user.email,
-                password: user.password,
-                bio: user.bio,
-              };
-              const response = await updateMyProfile(body)
-              console.log(response)
-            }}>
+            <form
+              data-aos="fade-left"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const body = {
+                  name: user.name,
+                  lastname: user.lastname,
+                  email: user.email,
+                  password: user.password,
+                  bio: user.bio,
+                };
+                const response = await updateMyProfile(body);
+                if (response) {
+                  location.reload();
+                  return;
+                } else {
+                  toast.error("Senha ou Email inválido", { theme: "dark" });
+                  return;
+                }
+              }}
+            >
               <div>
                 <FaRegUser />
                 <label htmlFor="name">Nome</label>
@@ -155,21 +170,26 @@ export default function Acount() {
               <button>Salvar Alterações</button>
             </form>
           ) : (
-            <form data-aos="fade-left">
-              <div>
-                <MdOutlineAttachEmail />
-                <label htmlFor="email">Email</label>
-                <input
-                  id="email"
-                  placeholder="Entre com o seu email"
-                  required
-                  type="email"
-                  value={reset?.email}
-                  onChange={(e) => {
-                    setResest((prev) => ({ ...prev, email: e.target.value }));
-                  }}
-                />
-              </div>
+            <form
+              data-aos="fade-left"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const body = {
+                  email: reset.email,
+                  newPassword: reset.newPassword,
+                  password: reset.password,
+                };
+                const response = await resetPassword(body);
+                if (response) {
+                  location.reload();
+                  return;
+                } else {
+                  toast.error("Senha inválida", { theme: "dark" });
+                  return;
+                }
+              }}
+            >
+             
               <div>
                 <FiLock />
                 <label htmlFor="password">Senha</label>
@@ -197,11 +217,14 @@ export default function Acount() {
                   required
                   value={reset?.newPassword}
                   onChange={(e) => {
-                    setResest((prev) => ({ ...prev, newPassword: e.target.value }));
+                    setResest((prev) => ({
+                      ...prev,
+                      newPassword: e.target.value,
+                    }));
                   }}
                 />
               </div>
-              <button>Salvar Alterações</button>
+              <button>Salvar Senha</button>
             </form>
           )}
         </>

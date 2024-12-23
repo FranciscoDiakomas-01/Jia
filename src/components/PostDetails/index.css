@@ -9,12 +9,8 @@
   padding-top: 20px;
 }
 
-#postDetails > svg {
-  top: 0px;
-  left: 20px;
-  font-size: 18pt;
-  color: var(--green);
-  height: 40px;
+#postDetails svg {
+  font-size: 15pt;
 }
 
 #postDetails > aside {

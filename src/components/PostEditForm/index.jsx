@@ -1,5 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import "./index.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Loader from "../../components/Loader";
@@ -7,13 +7,14 @@ import { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import { createPost } from "../../services/posts";
-export default function PostForm() {
+import {updatePost , getPostById } from "../../services/posts";
+export default function PostEditForm() {
   const [isLoad, setLoad] = useState(true);
   const nav = useNavigate()
   const [name, setName] = useState("");
   const [isAdding , setAdd] = useState(false)
   const [description, setDescription] = useState("");
+  const postid = sessionStorage.getItem("postid")
   useEffect(() => {
     setLoad(true);
     AOS.init({
@@ -22,6 +23,12 @@ export default function PostForm() {
       once: false,
       offset: 150,
     });
+     async function getData() {
+       const response = await getPostById(postid);
+       setName(response?.data.data.posttitle);
+       setDescription(response?.data.data.posttext);
+     }
+     getData()
     setTimeout(() => {
       setLoad(false);
     }, 2000);
@@ -29,46 +36,51 @@ export default function PostForm() {
   
   return (
     <article id="createPost">
-      <ToastContainer style={{
-        zIndex : '999999999999999999999999999999'
-      }}/>
+      <ToastContainer
+        style={{
+          zIndex: "999999999999999999999999999999",
+        }}
+      />
       {isLoad ? (
         <Loader />
       ) : (
         <>
           <FaArrowLeft
             onClick={() => {
-              nav("/posts");
+              history.back()
             }}
           />
           <form
             data-aos="fade-left"
-            onSubmit={async(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
               if (!name || !description) {
-                setAdd(false)
-                toast.error("Prencha todos os Campos!", {theme : 'dark' , position : 'bottom-right'})
-                return
+                setAdd(false);
+                toast.error("Prencha todos os Campos!", {
+                  theme: "dark",
+                  position: "bottom-right",
+                });
+                return;
               } else {
                 const body = {
                   title: name,
                   text: description,
+                  postid: postid,
                 };
-                setName(prev => "")
-                setDescription(prev => "")
-                setAdd(true)
-                const response = await createPost(body)
+                setAdd(true);
+                const response = await updatePost(body);
                 if (response) {
-                   toast.success("Publicado com sucesso!", {
-                     theme: "dark"
-                   });
+                  toast.success("Alterado com sucesso!", {
+                    theme: "dark",
+                  });
                   setTimeout(() => {
-                    setAdd(false)
-                  }, 2000)
-                  return
+                    setAdd(false);
+                    history.back()
+                  }, 2000);
+                  return;
                 } else {
                   setAdd(false);
-                  toast.error("Erro ao cadastrar", {
+                  toast.error("Erro ao Alterar", {
                     theme: "dark",
                     position: "bottom-right",
                   });
@@ -101,9 +113,13 @@ export default function PostForm() {
                 opacity: isAdding && "0.3",
               }}
             >
-                {!isAdding ? <p>Publicar</p> : <div>
+              {!isAdding ? (
+                <p>Publicar</p>
+              ) : (
+                <div>
                   <span></span>
-                </div>}
+                </div>
+              )}
             </button>
           </form>
         </>
