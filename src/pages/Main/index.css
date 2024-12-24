@@ -137,7 +137,7 @@
 @media screen and (max-width: 1024px) {
 
   #main{
-    padding-bottom: 70px;
+    padding-bottom: 90px;
   }
   #main > section{
     display: flex;
