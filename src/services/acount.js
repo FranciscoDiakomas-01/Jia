@@ -54,6 +54,9 @@ export async function resetPassword(body) {
 }
 
 export async function isLogged() {
+  if(!localStorage.getItem("uuid")){
+    return false
+  }
   const response = await getUserbyId(localStorage.getItem("uuid"));
   return response?.data?.userdata.id ? true : false;
 }

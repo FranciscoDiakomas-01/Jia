@@ -24,7 +24,7 @@ export async function login(email , password) {
 
 export async function singn(email , password , name , lastname) {
     
-    if ( !name || !lastname || !email || !password || password?.length < 8 || !validateEmail(email)) {
+    if ( name?.length <= 1 || lastname?.length <= 1 || !email || !password || password?.length < 8 || !validateEmail(email)) {
         return false
     } else {
         const body = {

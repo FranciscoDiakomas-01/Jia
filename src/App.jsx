@@ -12,6 +12,7 @@ import "aos/dist/aos.css";
 import { isLogged } from "./services/acount";
 export function App() {
   const [active, setActive] = useState(0)
+  const [logged , setLogged] = useState(false)
     useEffect(() => {
       AOS.init({
         duration: 800,
@@ -21,17 +22,21 @@ export function App() {
       });
       async function isLog() {
         const is = await isLogged();
-
         if(is){
-          console.log(is)
+          setLogged(true)
           return
         }else{
+          setLogged(false);
+          if(window.location.pathname != "/singin"){
+            return
+          }
+          nav("/login");
           localStorage.clear()
           sessionStorage.clear()
-          nav("/login")
           return
         }
       }
+      isLog()
       setInterval(() => {
         isLog()
       }, 5000)
@@ -68,85 +73,93 @@ export function App() {
   ];
   return (
     <main id="app">
-      <ToastContainer
-        style={{
-          zIndex: "999999999999999999999999999999999",
-        }}
-      ></ToastContainer>
-      <div id="logo">
-        <img src={logo} alt="logo" onClick={()=>{
-          nav("/")
-        }}/>
-      </div>
-      <nav id="navBar">
-        <img src={logo} alt="logo" />
-        <ol>
-          {navigations.map((nav, index) => (
-            <Link
-              to={nav.path}
-              style={{
-                color: active == index && "var(--green)",
-                opacity: active == index && 1,
-              }}
-              key={index}
+      {logged ? (
+        <>
+          <ToastContainer
+            style={{
+              zIndex: "999999999999999999999999999999999",
+            }}
+          ></ToastContainer>
+          <div id="logo">
+            <img
+              src={logo}
+              alt="logo"
               onClick={() => {
-                if (index == 3) {
-                  sessionStorage.clear();
-                }
-                window.scrollTo({
-                  behavior: "smooth",
-                  left: 0,
-                  top: -10000000000,
-                });
-                setActive(index);
+                nav("/");
+              }}
+            />
+          </div>
+          <nav id="navBar">
+            <img src={logo} alt="logo" />
+            <ol>
+              {navigations.map((nav, index) => (
+                <Link
+                  to={nav.path}
+                  style={{
+                    color: active == index && "var(--green)",
+                    opacity: active == index && 1,
+                  }}
+                  key={index}
+                  onClick={() => {
+                    if (index == 3) {
+                      sessionStorage.clear();
+                    }
+                    window.scrollTo({
+                      behavior: "smooth",
+                      left: 0,
+                      top: -10000000000,
+                    });
+                    setActive(index);
+                  }}
+                >
+                  {nav.icon}
+                  <p>{nav.title}</p>
+                </Link>
+              ))}
+            </ol>
+            <button
+              onClick={() => {
+                sessionStorage.clear();
+                localStorage.clear();
+                nav("/login");
               }}
             >
-              {nav.icon}
-              <p>{nav.title}</p>
-            </Link>
-          ))}
-        </ol>
-        <button
-          onClick={() => {
-            sessionStorage.clear();
-            localStorage.clear();
-            nav("/login");
-          }}
-        >
-          Sair
-        </button>
-      </nav>
-      <section>
-        <Outlet />
-      </section>
+              Sair
+            </button>
+          </nav>
+          <section>
+            <Outlet />
+          </section>
 
-      <nav id="mobilenav">
-        <ol>
-          {navigations.map((nav, index) => (
-            <Link
-              to={nav.path}
-              style={{
-                color: active == index && "var(--pink)",
-                opacity: active == index ? 1 : 0.6
-              }}
-              key={index}
-              onClick={() => {
-                if (index == 3) {
-                  sessionStorage.clear();
-                }
-                window.scrollTo({
-                  behavior: "smooth",
-                  left: 0,
-                  top: -10000000000,
-                });
-                setActive(index);
-              }}
-            >
-              {nav.icon}
-            </Link>
-          ))}
-        </ol>
-      </nav>
+          <nav id="mobilenav">
+            <ol>
+              {navigations.map((nav, index) => (
+                <Link
+                  to={nav.path}
+                  style={{
+                    color: active == index && "var(--pink)",
+                    opacity: active == index ? 1 : 0.6,
+                  }}
+                  key={index}
+                  onClick={() => {
+                    if (index == 3) {
+                      sessionStorage.clear();
+                    }
+                    window.scrollTo({
+                      behavior: "smooth",
+                      left: 0,
+                      top: -10000000000,
+                    });
+                    setActive(index);
+                  }}
+                >
+                  {nav.icon}
+                </Link>
+              ))}
+            </ol>
+          </nav>
+        </>
+      ) : undefined}
     </main>
   );
 }

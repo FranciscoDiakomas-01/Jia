@@ -23,6 +23,7 @@ const nav = useNavigate()
          setIsLoading((prev) => true);
          if (response?.data == "sucess") {
            localStorage.clear()
+           sessionStorage.clear()
            localStorage.setItem("token" , response?.token)
            localStorage.setItem("uuid", response?.id);
            setTimeout(() => {
