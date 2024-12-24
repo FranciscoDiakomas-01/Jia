@@ -28,8 +28,8 @@ export function App() {
           return
         }else{
           setLogged(false);
-          if(window.location.pathname != "/singin"){
-            return
+          if (String(window.location.pathname).includes("singin")) {
+            return;
           }
           nav("/login");
           localStorage.clear()
