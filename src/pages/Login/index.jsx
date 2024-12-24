@@ -26,12 +26,7 @@ const nav = useNavigate()
            sessionStorage.clear()
            localStorage.setItem("token" , response?.token)
            localStorage.setItem("uuid", response?.id);
-           setTimeout(() => {
-             setIsLoading((prev) => false);
-             setTimeout(() => {
-               nav("/");
-             }, 1000);
-           }, 2000);
+           location.reload();
          } else {
            setTimeout(() => {
              setIsLoading((prev) => false);

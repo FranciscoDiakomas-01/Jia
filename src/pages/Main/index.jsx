@@ -59,7 +59,7 @@ export default function Main() {
         if (response?.data.data?.length == 0) {
           toast.info("Ainda não há pulicações!", {
             theme: "dark",
-            position: "top-right",
+            position: "top-left",
           });
           return;
         }
