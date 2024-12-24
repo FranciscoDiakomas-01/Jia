@@ -13,7 +13,7 @@ const [isLoading, setIsLoading] = useState(false)
 const [step , setStep]  = useState(1)
 const nav = useNavigate()
  return (
-   <section id="login">
+   <article id="login">
      <form
        onSubmit={async (e) => {
          //check Steps
@@ -148,6 +148,6 @@ const nav = useNavigate()
          Já tens uma conta ? entrar.
        </a>
      </form>
-   </section>
+   </article>
  );
 }

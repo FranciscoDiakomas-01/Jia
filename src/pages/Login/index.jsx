@@ -10,7 +10,7 @@ const [password, setPassowrd] = useState("");
 const [isLoading, setIsLoading] = useState(false)
 const nav = useNavigate()
  return (
-   <section id="login">
+   <article id="login">
      <form
        onSubmit={async (e) => {
          e.preventDefault();
@@ -90,6 +90,6 @@ const nav = useNavigate()
         nav("/singin")
        }}>Ainda não tens uma conta ? criar.</a>
      </form>
-   </section>
+   </article>
  );
 }
