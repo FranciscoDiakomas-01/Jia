@@ -147,6 +147,7 @@
   }
   #main > section figure {
     width: 90%;
+    padding-top: 80px;
   }
   #main > section figure > div {
     border-radius: 8px;
