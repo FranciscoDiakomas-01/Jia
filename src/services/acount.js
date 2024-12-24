@@ -8,7 +8,7 @@ export async function updateMyProfile(body) {
         return false
     }
      try {
-       const api = await fetch("http://localhost:3000/user", {
+       const api = await fetch("https://jiabackend.onrender.com/user", {
          method: "PUT",
          headers: {
            "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export async function resetPassword(body) {
         return false
     }
      try {
-       const api = await fetch("http://localhost:3000/resetpassword", {
+       const api = await fetch("https://jiabackend.onrender.com/resetpassword", {
          method: "PUT",
          headers: {
            "Content-Type": "application/json",

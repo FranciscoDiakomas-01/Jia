@@ -8,7 +8,7 @@ export async function login(email , password) {
           email: email,
           password: password,
         };
-        const API = await fetch("http://localhost:3000/login", {
+        const API = await fetch("https://jiabackend.onrender.com/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -33,7 +33,7 @@ export async function singn(email , password , name , lastname) {
           name: name,
           lastname: lastname,
         };
-        const API = await fetch("http://localhost:3000/singin", {
+        const API = await fetch("https://jiabackend.onrender.com/singin", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

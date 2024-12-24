@@ -4,7 +4,7 @@
 
 export async function createComment(body) {
   try {
-    const API = await fetch(`http://localhost:3000/comment`, {
+    const API = await fetch(`https://jiabackend.onrender.com/comment`, {
       headers: {
         "Content-Type": "application/json",
         authorization: localStorage.getItem("token"),
@@ -20,7 +20,7 @@ export async function createComment(body) {
 }
 export async function getCommentByPostId(postid , page = 1) {
     try {
-        const API = await fetch(`http://localhost:3000/comment/${postid}?page=${page}`, {
+        const API = await fetch(`https://jiabackend.onrender.com/comment/${postid}?page=${page}`, {
           headers: {
             "Content-Type": "application/json",
             authorization: localStorage.getItem("token"),
@@ -42,7 +42,7 @@ export function isMyComent(commentUserId){
 
 export async function deleteComment(commentId , postid = -1) {
     try {
-        const API = await fetch(`http://localhost:3000/comment/${commentId}?post=${postid}`, {
+        const API = await fetch(`https://jiabackend.onrender.com/comment/${commentId}?post=${postid}`, {
           headers: {
             "Content-Type": "application/json",
             authorization: localStorage.getItem("token"),
@@ -61,7 +61,7 @@ export async function deleteComment(commentId , postid = -1) {
 export async function updatecommetnById(commentId , body) {
   
     try {
-        const API = await fetch(`http://localhost:3000/comment/${commentId}`, {
+        const API = await fetch(`https://jiabackend.onrender.com/comment/${commentId}`, {
           headers: {
             "Content-Type": "application/json",
             authorization: localStorage.getItem("token"),
