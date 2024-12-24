@@ -37,9 +37,7 @@ const nav = useNavigate()
                  localStorage.clear()
                  localStorage.setItem("token", response?.token)
                  localStorage.setItem("uuid", response?.id);
-                 setTimeout(() => {
-                   nav("/");
-                 }, 1000);
+                 location.reload()
                }, 2000);
              } else {
                  document.getElementById("response").textContent = "Este email esta em uso tente outro";

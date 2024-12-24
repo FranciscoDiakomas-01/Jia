@@ -59,11 +59,8 @@ export default function Main() {
         if (response?.data.data?.length == 0) {
           toast.info("Ainda não há pulicações!", {
             theme: "dark",
-            position: "top-left",
+            position: "top-right",
           });
-          setTimeout(() => {
-            nav("/posts");
-          }, 2000);
           return;
         }
         setPost((prev) => shuffleArray(response?.data?.data));
@@ -96,7 +93,7 @@ export default function Main() {
 
   return (
     <section id="main">
-      <ToastContainer />
+      <ToastContainer style={{zIndex : '99999999999999999'}}/>
       {isLoad ? (
         <Loader />
       ) : (
