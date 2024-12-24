@@ -4,7 +4,7 @@ import Loader from "../../components/Loader";
 import { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { createPost } from "../../services/posts";
 export default function PostForm() {
   const [isLoad, setLoad] = useState(true);
@@ -16,14 +16,12 @@ export default function PostForm() {
     setLoad(true);
     setTimeout(() => {
       setLoad(false);
-    }, 2000);
+    }, 1000);
   }, []);
   
   return (
     <article id="createPost">
-      <ToastContainer style={{
-        zIndex : '999999999999999999999999999999'
-      }}/>
+     
       {isLoad ? (
         <Loader />
       ) : (

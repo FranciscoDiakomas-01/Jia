@@ -47,7 +47,7 @@ export default function Users() {
 
     setTimeout(() => {
       setLoad(false);
-    }, 2000);
+    }, 4000);
   }, [page, reload]);
 
   return (

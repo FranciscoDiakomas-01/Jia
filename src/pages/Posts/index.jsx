@@ -23,8 +23,8 @@ export default function Posts() {
       setLoad(true);
      
       setTimeout(() => {
-        setLoad(false)
-      },2000)
+        setLoad(false);
+      }, 4000);
     }, [page]);
 
  return (

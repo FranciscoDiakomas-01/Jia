@@ -46,7 +46,7 @@ export default function UsersProfile() {
     setLoad(true);
     setTimeout(() => {
       setLoad(false);
-    }, 2000);
+    }, 4000);
   }, []);
   return (
     <section id="usersProfile">

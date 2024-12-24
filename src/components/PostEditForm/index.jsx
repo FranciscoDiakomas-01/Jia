@@ -2,7 +2,7 @@
 import Loader from "../../components/Loader";
 import { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import {updatePost , getPostById } from "../../services/posts";
 export default function PostEditForm() {
   const [isLoad, setLoad] = useState(true);
@@ -21,16 +21,12 @@ export default function PostEditForm() {
      getData()
     setTimeout(() => {
       setLoad(false);
-    }, 2000);
+    }, 4000);
   }, []);
   
   return (
     <article id="createPost">
-      <ToastContainer
-        style={{
-          zIndex: "999999999999999999999999999999",
-        }}
-      />
+     
       {isLoad ? (
         <Loader />
       ) : (

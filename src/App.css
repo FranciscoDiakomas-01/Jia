@@ -6,7 +6,12 @@
   position: relative;
 }
 
-
+#app > #loader{
+  width: 100dvw;
+  height: 100vh;
+  z-index: 99999999999;
+  background-color: var(--black);
+}
 button{
   border: none;
   cursor: pointer;

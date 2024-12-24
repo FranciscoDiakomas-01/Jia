@@ -25,7 +25,7 @@ import {
   getCommentByPostId,
   isMyComent,
 } from "../../services/comment";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 export default function PostDetails() {
   const [post, setPost] = useState();
   const [comment, setComment] = useState([]);
@@ -46,7 +46,7 @@ export default function PostDetails() {
     }
     setTimeout(() => {
       setLoad(false);
-    }, 2000);
+    }, 4000);
   }, []);
 
   useEffect(() => {
@@ -100,11 +100,6 @@ export default function PostDetails() {
       {
         updateComment && <CommentEditForm close={setUpdateComment}  text={commentText}/>
       }
-      <ToastContainer
-        style={{
-          zIndex: "9999999999",
-        }}
-      />
       {isLoad ? (
         <Loader />
       ) : (
@@ -242,11 +237,11 @@ export default function PostDetails() {
             <figcaption>
               <button
                 onClick={async () => {
-                  setLoad(true);
-                  await deletePost(post?.postid);
+                  
                   setTimeout(() => {
                     nav("/");
                   }, 1000);
+                  await deletePost(post?.postid);
                 }}
               >
                 Eliminar

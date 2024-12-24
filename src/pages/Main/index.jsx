@@ -13,7 +13,7 @@ import {
   like,
   resetFilter,
 } from "../../services/posts";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { shuffleArray } from "../../services/util";
 export default function Main() {
   const [posts, setPost] = useState([]);
@@ -35,7 +35,7 @@ export default function Main() {
    
     setTimeout(() => {
       setLoad(false);
-    }, 1000);
+    }, 4000);
     async function get() {
       if (filter.length != 0) {
         const response = await getPostsByNameOrDescription(filter, page, 10);
@@ -93,7 +93,6 @@ export default function Main() {
 
   return (
     <section id="main">
-      <ToastContainer style={{zIndex : '99999999999999999'}}/>
       {isLoad ? (
         <Loader />
       ) : (

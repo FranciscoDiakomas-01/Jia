@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { getUserbyId} from '../../services/users'
 import { MdOutlineAttachEmail } from "react-icons/md";
 import { resetPassword, updateMyProfile } from "../../services/acount.js";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 export default function Acount() {
   const [isLoad, setLoad] = useState(true);
   const [active, setActive] = useState(0);
@@ -21,28 +21,20 @@ export default function Acount() {
     async function get() {
       const data = await getUserbyId(localStorage.getItem("uuid"));
       setUser(data?.data.userdata);
+      console.log(data?.data.userdata)
       setResest((prev) => ({ ...prev, email: data?.data.userdata.email }));
     }
     get()
     setLoad(true);
     setTimeout(() => {
       setLoad(false);
-    }, 2000);
+    }, 4000);
   }, []);
   useEffect(()=>{
-    setResest({
-      email: "",
-      password: "",
-      newPassword: "",
-    });
+    setResest(prev => ({...prev ,password : '' , newPassword : ''}));
   },[active])
   return (
     <article id="acount">
-      <ToastContainer
-        style={{
-          zIndex: "99999999999999999999999999999999999",
-        }}
-      />
       {isLoad ? (
         <Loader />
       ) : (
@@ -115,7 +107,7 @@ export default function Acount() {
                   id="name"
                   placeholder="Entre com o seu nome"
                   required
-                  value={user.name}
+                  value={user?.name}
                   onChange={(e) => {
                     setUser((prev) => ({ ...prev, name: e.target.value }));
                   }}
@@ -128,7 +120,7 @@ export default function Acount() {
                   id="lastname"
                   placeholder="Entre com o seu sobrenome"
                   required
-                  value={user.lastname}
+                  value={user?.lastname}
                   onChange={(e) => {
                     setUser((prev) => ({ ...prev, lastname: e.target.value }));
                   }}
@@ -140,7 +132,7 @@ export default function Acount() {
                 <input
                   id="bio"
                   placeholder="Entre com o sua biografia"
-                  value={user.bio}
+                  value={user?.bio}
                   onChange={(e) => {
                     setUser((prev) => ({ ...prev, bio: e.target.value }));
                   }}
@@ -154,7 +146,7 @@ export default function Acount() {
                   placeholder="Entre com o seu email"
                   required
                   type="email"
-                  value={user.email}
+                  value={user?.email}
                   onChange={(e) => {
                     setUser((prev) => ({ ...prev, email: e.target.value }));
                   }}
@@ -179,6 +171,8 @@ export default function Acount() {
             <form
               data-aos="fade-left"
               onSubmit={async (e) => {
+                
+              console.log(reset.email);
                 e.preventDefault();
                 const body = {
                   email: reset.email,

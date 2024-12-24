@@ -26,12 +26,12 @@ const nav = useNavigate()
            sessionStorage.clear()
            localStorage.setItem("token" , response?.token)
            localStorage.setItem("uuid", response?.id);
-           location.reload();
+           nav("/")
          } else {
            setTimeout(() => {
              setIsLoading((prev) => false);
             document.getElementById("response").textContent = "";
-           }, 3000);
+           }, 1000);
            return;
          }
        }}

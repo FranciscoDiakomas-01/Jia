@@ -33,12 +33,11 @@ const nav = useNavigate()
              if (response?.data == "created") {
                setTimeout(() => {
                  setIsLoading((prev) => false);
-                 
                  localStorage.clear()
                  localStorage.setItem("token", response?.token)
                  localStorage.setItem("uuid", response?.id);
                  location.reload()
-               }, 2000);
+               }, 1000);
              } else {
                  document.getElementById("response").textContent = "Este email esta em uso tente outro";
                  setName(prev => "")
@@ -47,7 +46,7 @@ const nav = useNavigate()
                  setPassowrd(prev => "")
                  setTimeout(() => {
                      setStep(prev => 1)
-                 }, 1500);
+                 }, 1000);
                  return
              }
              return;
