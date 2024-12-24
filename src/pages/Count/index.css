@@ -6,6 +6,9 @@
     gap: 20px;
 }
 
+#acount #logout{
+    display: none;
+}
 #acount nav button{
     width: 120px;
     background-color: transparent;
@@ -111,6 +114,11 @@
 }
 
 @media screen and (max-width : 1024px) {
+    #acount #logout{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
  
 #acount{
     padding: 100px 0;

@@ -20,7 +20,8 @@ export async function getUserbyId(id) {
         authorization: localStorage.getItem("token"),
       },
     });
-    return await API.json();
+    const respone = await  API.json();
+    return respone
   } catch (error) {
     return error;
   }

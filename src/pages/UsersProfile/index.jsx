@@ -1,7 +1,5 @@
 import "./index.css";
-import { useEffect, useState } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { useEffect, useState } from "react"
 import { getPostByUserId } from "../../services/posts";
 import Loader from "../../components/Loader";
 import { FaHeart, FaRegComment, FaRegHeart } from "react-icons/fa";
@@ -46,12 +44,6 @@ export default function UsersProfile() {
       top: -10000000000,
     });
     setLoad(true);
-    AOS.init({
-      duration: 800,
-      easing: "ease-in-out",
-      once: false,
-      offset: 40,
-    });
     setTimeout(() => {
       setLoad(false);
     }, 2000);
@@ -67,7 +59,7 @@ export default function UsersProfile() {
               {user?.userdata?.name.at(0) + "" + user?.userdata?.lastname.at(0)}
             </div>
             <aside>
-              <h1>{user?.userdata?.name + " " + user?.lastname}</h1>
+              <h1>{user?.userdata?.name + " " + user?.userdata?.lastname}</h1>
               <i>{user?.userdata?.email}</i>
               <p>{user?.userdata?.bio}</p>
               <div>
@@ -79,86 +71,99 @@ export default function UsersProfile() {
             </aside>
           </span>
           <section>
-            {Array.isArray(myPost) &&
-              myPost?.length > 0 &&
-              myPost?.map((post) => (
-                <figure
-                  key={post.id}
-                  data-aos="slide-up"
-                  onClick={() => {
-                    sessionStorage.setItem("postid", post.postid);
-                    nav("/postDetails");
-                  }}
-                >
-                  <div
+            {Array.isArray(myPost) && myPost?.length > 0 ? (
+              <>
+                {myPost?.map((post) => (
+                  <figure
+                    key={post.id}
+                    data-aos="slide-up"
                     onClick={() => {
+                      sessionStorage.setItem("postid", post.postid);
                       nav("/postDetails");
                     }}
-                    style={{
-                      backgroundImage: post?.postbg,
-                    }}
                   >
-                    {post?.posttitle?.slice(0, 100)}...
-                  </div>
-                  <p>
-                    {post.posttitle?.slice(0, 100) + " "}
-                    <a
-                      style={{ textDecoration: "underline", cursor: "pointer" }}
+                    <div
+                      onClick={() => {
+                        nav("/postDetails");
+                      }}
+                      style={{
+                        backgroundImage: post?.postbg,
+                      }}
                     >
-                      ver detalhes
-                    </a>
-                    ...
-                  </p>
-                  <article>
-                    <button>
-                      {" "}
-                      {post?.is_liked ? (
-                        <FaHeart style={{ color: "var(--pink)" }} />
-                      ) : (
-                        <FaRegHeart />
-                      )}
-                    </button>
-                    <button>
-                      <FaRegComment />
-                    </button>
-                  </article>
-                  <p style={{ cursor: "pointer" }}>
-                    {post.comment} Comentários & {post.likes} Curtidas{" "}
-                  </p>
-                </figure>
-              ))}
+                      {post?.posttitle?.slice(0, 100)}...
+                    </div>
+                    <p>
+                      {post.posttitle?.slice(0, 100) + " "}
+                      <a
+                        style={{
+                          textDecoration: "underline",
+                          cursor: "pointer",
+                        }}
+                      >
+                        ver detalhes
+                      </a>
+                      ...
+                    </p>
+                    <article>
+                      <button>
+                        {" "}
+                        {post?.is_liked ? (
+                          <FaHeart style={{ color: "var(--pink)" }} />
+                        ) : (
+                          <FaRegHeart />
+                        )}
+                      </button>
+                      <button>
+                        <FaRegComment />
+                      </button>
+                    </article>
+                    <p style={{ cursor: "pointer" }}>
+                      {post.comment} Comentários & {post.likes} Curtidas{" "}
+                    </p>
+                  </figure>
+                ))}
+              </>
+            ) : (
+              <h1 id="noPost">
+                O(a) {user?.userdata?.name + " " + user?.userdata?.lastname} não
+                tem nenhuma publicação!🙁
+              </h1>
+            )}
           </section>
         </>
       )}
-      <footer>
-        <p>
-          {page} de {lasPage}
-        </p>
-        <div>
-          <button
-            onClick={() => {
-              if (page <= 1) {
-                return;
-              } else {
-                setPage((prev) => prev - 1);
-              }
-            }}
-          >
-            {"<"}
-          </button>
-          <button
-            onClick={() => {
-              if (page == lasPage) {
-                return;
-              } else {
-                setPage((prev) => prev + 1);
-              }
-            }}
-          >
-            {">"}
-          </button>
-        </div>
-      </footer>
+
+      {myPost?.length > 0 && (
+        <footer>
+          <p>
+            {page} de {lasPage}
+          </p>
+          <div>
+            <button
+              onClick={() => {
+                if (page <= 1) {
+                  return;
+                } else {
+                  setPage((prev) => prev - 1);
+                }
+              }}
+            >
+              {"<"}
+            </button>
+            <button
+              onClick={() => {
+                if (page == lasPage) {
+                  return;
+                } else {
+                  setPage((prev) => prev + 1);
+                }
+              }}
+            >
+              {">"}
+            </button>
+          </div>
+        </footer>
+      )}
     </section>
   );
 }

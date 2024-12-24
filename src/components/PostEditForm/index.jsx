@@ -1,28 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
-import AOS from "aos";
-import "aos/dist/aos.css";
 import Loader from "../../components/Loader";
 import { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import {updatePost , getPostById } from "../../services/posts";
 export default function PostEditForm() {
   const [isLoad, setLoad] = useState(true);
-  const nav = useNavigate()
   const [name, setName] = useState("");
   const [isAdding , setAdd] = useState(false)
   const [description, setDescription] = useState("");
   const postid = sessionStorage.getItem("postid")
   useEffect(() => {
     setLoad(true);
-    AOS.init({
-      duration: 800,
-      easing: "ease-in-out",
-      once: false,
-      offset: 150,
-    });
+   
      async function getData() {
        const response = await getPostById(postid);
        setName(response?.data.data.posttitle);

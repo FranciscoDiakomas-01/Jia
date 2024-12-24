@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Link , Outlet, useNavigate} from "react-router-dom";
 import "./App.css";
 import logo from './assets/logo.png'
@@ -5,8 +6,37 @@ import { FaUsers, FaComment, FaUser, FaHome } from "react-icons/fa";
 import { LuSettings } from "react-icons/lu";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { isLogged } from "./services/acount";
 export function App() {
   const [active, setActive] = useState(0)
+    useEffect(() => {
+      AOS.init({
+        duration: 800,
+        easing: "ease-in-out",
+        once: false,
+        offset: 150,
+      });
+      async function isLog() {
+        const is = await isLogged();
+
+        if(is){
+          console.log(is)
+          return
+        }else{
+          localStorage.clear()
+          sessionStorage.clear()
+          nav("/login")
+          return
+        }
+      }
+      setInterval(() => {
+        isLog()
+      }, 5000)
+      
+    }, []);
   const nav = useNavigate()
   const navigations = [
     {
@@ -78,6 +108,8 @@ export function App() {
         </ol>
         <button
           onClick={() => {
+            sessionStorage.clear();
+            localStorage.clear();
             nav("/login");
           }}
         >

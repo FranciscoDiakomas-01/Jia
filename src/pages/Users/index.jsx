@@ -3,8 +3,6 @@
 import "./inde.css";
 import { FaSearch, FaRegPaperPlane, FaSync } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import Loader from "../../components/Loader";
 import { useEffect, useState } from "react";
 import { getUsers, getUsersbyName } from "../../services/users";
@@ -17,14 +15,7 @@ export default function Users() {
   const [page, setPage] = useState(1);
   const [lastPage, setLasPage] = useState(1);
   const [filter, setFilter] = useState("");
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      easing: "ease-in-out",
-      once: false,
-      offset: 10,
-    });
-  }, []);
+
   useEffect(() => {
     async function get() {
       if (filter.length > 0) {
@@ -106,7 +97,7 @@ export default function Users() {
                     <div>
                       {user?.name?.at(0).toUpperCase() + user?.lastname?.at(0)}
                     </div>
-                    <p>{user?.name + user?.lastname}</p>
+                    <p>{user?.name + " " + user?.lastname}</p>
                     <i>{user?.email}</i>
                   </span>
                   <button

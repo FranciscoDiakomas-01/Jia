@@ -1,7 +1,5 @@
 /* eslint-disable no-unused-vars */
 import "./index.css";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import Loader from "../../components/Loader";
 import { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
@@ -16,12 +14,6 @@ export default function PostForm() {
   const [description, setDescription] = useState("");
   useEffect(() => {
     setLoad(true);
-    AOS.init({
-      duration: 800,
-      easing: "ease-in-out",
-      once: false,
-      offset: 150,
-    });
     setTimeout(() => {
       setLoad(false);
     }, 2000);

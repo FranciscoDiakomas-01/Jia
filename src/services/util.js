@@ -8,3 +8,7 @@ export default function formatToSocialMidiaNumbers(number){
     })
     return formmater.format(number)
 }
+
+export function shuffleArray(array){
+    return array.sort(() => Math.random() - 0.5)
+}   

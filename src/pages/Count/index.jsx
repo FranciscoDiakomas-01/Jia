@@ -1,6 +1,4 @@
 import "./index.css";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import Loader from "../../components/Loader";
 import { FiLock } from "react-icons/fi";
 import { IoText } from "react-icons/io5";
@@ -27,12 +25,6 @@ export default function Acount() {
     }
     get()
     setLoad(true);
-    AOS.init({
-      duration: 800,
-      easing: "ease-in-out",
-      once: false,
-      offset: 150,
-    });
     setTimeout(() => {
       setLoad(false);
     }, 2000);
@@ -56,6 +48,20 @@ export default function Acount() {
       ) : (
         <>
           <nav>
+            <button
+            id="logout"
+              style={{
+                color: active == 1 && "var(--pink)",
+                opacity:  1,
+              }}
+              onClick={() => {
+                localStorage.clear();
+                sessionStorage.clear();
+                location.reload();
+              }}
+            >
+              Sair
+            </button>
             <button
               style={{
                 color: active == 1 && "var(--green)",
@@ -189,7 +195,6 @@ export default function Acount() {
                 }
               }}
             >
-             
               <div>
                 <FiLock />
                 <label htmlFor="password">Senha</label>

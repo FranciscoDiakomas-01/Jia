@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 
+import { getUserbyId } from "./users";
+
 export async function updateMyProfile(body) {
     //validation
     if(body?.name.length <= 1 || body?.lastname.length <= 1 || !validateEmail(body?.email)){
@@ -49,4 +51,9 @@ export async function resetPassword(body) {
      } catch (error) {
        return false;
      }
+}
+
+export async function isLogged() {
+  const response = await getUserbyId(localStorage.getItem("uuid"));
+  return response?.data?.userdata.id ? true : false;
 }

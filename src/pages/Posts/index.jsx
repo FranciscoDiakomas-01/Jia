@@ -3,8 +3,6 @@ import './index.css'
 import { FaHeart, FaRegComment } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
-import AOS from "aos";
-import "aos/dist/aos.css";
 import Loader from '../../components/Loader';
 import { useNavigate } from 'react-router-dom';
 import { getPostByUserId } from '../../services/posts';
@@ -23,12 +21,7 @@ export default function Posts() {
       }
       get()
       setLoad(true);
-      AOS.init({
-        duration: 800, 
-        easing: "ease-in-out", 
-        once: false, 
-        offset: 100, 
-      });
+     
       setTimeout(() => {
         setLoad(false)
       },2000)

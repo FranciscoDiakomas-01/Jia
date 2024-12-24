@@ -1,8 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import "./index.css";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import Loader from "../../components/Loader";
 import CommentEditForm from "../CommentEditForm";
 import { useEffect, useState } from "react";
@@ -46,13 +44,6 @@ export default function PostDetails() {
       nav("/");
       return;
     }
-
-    AOS.init({
-      duration: 800,
-      easing: "ease-in-out",
-      once: false,
-      offset: 10,
-    });
     setTimeout(() => {
       setLoad(false);
     }, 2000);

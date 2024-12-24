@@ -5,8 +5,6 @@ import { FaHeart, FaRegComment, FaSearch, FaSync } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import Loader from "../../components/Loader";
 import {
   deslike,
@@ -16,6 +14,7 @@ import {
   resetFilter,
 } from "../../services/posts";
 import { toast, ToastContainer } from "react-toastify";
+import { shuffleArray } from "../../services/util";
 export default function Main() {
   const [posts, setPost] = useState([]);
   const [reload, setReload] = useState(false);
@@ -33,12 +32,7 @@ export default function Main() {
         left: 0,
       });
     }
-    AOS.init({
-      duration: 800,
-      easing: "ease-in-out",
-      once: false,
-      offset: 50,
-    });
+   
     setTimeout(() => {
       setLoad(false);
     }, 1000);
@@ -72,7 +66,7 @@ export default function Main() {
           }, 2000);
           return;
         }
-        setPost((prev) => response?.data?.data);
+        setPost((prev) => shuffleArray(response?.data?.data));
         setLasPage((prev) => response?.data.laspage);
         return;
       }

@@ -57,14 +57,14 @@ button:active , svg:active{
   display: flex;
   flex-direction: column;
   height: 100%;
-  gap: 15px;
+  gap: 20px;
   width: 90%;
 }
 #app > nav:first-of-type ol a{
   display: flex;
   background-color: #ffffff0e;
   backdrop-filter: blur(10px);
-  height: 75px;
+  height: 80px;
   width: 100%;
   border-radius: 4px;
   align-items: center;
