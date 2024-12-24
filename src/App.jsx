@@ -8,6 +8,7 @@ import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { useEffect } from "react";
 import AOS from "aos";
+import Login from "./pages/Login";
 import "aos/dist/aos.css";
 import { isLogged } from "./services/acount";
 export function App() {
@@ -159,7 +160,7 @@ export function App() {
             </ol>
           </nav>
         </>
-      ) : undefined}
+      ) : <Login/>}
     </main>
   );
 }
