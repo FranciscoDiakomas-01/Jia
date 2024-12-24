@@ -28,7 +28,7 @@ export default function Acount() {
     setLoad(true);
     setTimeout(() => {
       setLoad(false);
-    }, 4000);
+    }, 5000);
   }, []);
   useEffect(()=>{
     setResest(prev => ({...prev ,password : '' , newPassword : ''}));
